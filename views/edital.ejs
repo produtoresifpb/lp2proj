@@ -46,7 +46,15 @@
     <script>
         fetch('./json/editais.json')
             .then(res => res.json())
-            .then(({ editais }) => editais.forEach(el => {
+            .then(({ editais }) => { 
+                if (editais.length === 0) {
+                    const editaisDiv = document.getElementById('editais');
+                    const msg = `<li class="list-group-item">
+                                    <p>Nenhum edital encontrado</p>
+                                </li>`;
+                    editaisDiv.insertAdjacentHTML('beforeend', msg);
+                }
+                editais.forEach(el => {
                 const edital = `<li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
                                     <h4 class="text-black">>> Edital n° ${el.id} - ${el.autor}</h4>
                                     </a>
@@ -55,7 +63,7 @@
                 
                 const editaisDiv = document.getElementById('editais');
                 editaisDiv.insertAdjacentHTML('beforeend', edital);
-            }))
+            })})
             .catch(e => console.log(e))
     </script>
     <%- include('partials/vlibras.ejs') %>
