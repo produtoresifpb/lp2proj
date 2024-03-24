@@ -1,0 +1,21 @@
+.link-underline:hover {
+    text-decoration: black underline !important;
+}
+  
+.box-bar {
+    margin: 20px 0 20px 0;
+    font-size: 18px;
+}
+
+.box-bar p {
+    font-weight: bold;
+}
+
+.box-bar p span {
+    font-weight: normal;
+}
+
+.box-bar form input {
+    background-color: #D9D9D9;
+}
+  
