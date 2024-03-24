@@ -2,10 +2,10 @@
 <html lang="pt-br">
 
 <head>
-   
+
     <%- include('partials/head.ejs') %>
-    <link rel="stylesheet" href="./stylesheets/edital.css">
-    <title>Portal do Artista</title>
+        <link rel="stylesheet" href="./stylesheets/edital.css">
+        <title>Portal do Artista</title>
 </head>
 
 <body>
@@ -19,7 +19,8 @@
                     <div class="box-bar">
                         <div class="row row-cols-auto">
                             <p class="col-8">Buscando por: <span>Editais recentes</span></p>
-                            <button class="btn"><span class="col">Filtrar <i class="bi bi-filter"></i></i></span></button>
+                            <button class="btn"><span class="col">Filtrar <i
+                                        class="bi bi-filter"></i></i></span></button>
                             <form class="d-flex col-3" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Buscar por editais"
                                     aria-label="Search">
@@ -29,52 +30,36 @@
                         </div>
                     </div>
                     <div class="container-edital">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" id="editais">
                             <span class="list-group-item" style="background-color: #64375E; color: white;">
                             </span>
                             <li class="list-group-item list-group-item-secondary" aria-current="true">
                                 <h4>Editais publicados</h4>
                             </li>
-                            <li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° 0000 - Editora PA</h4>
-                                </a>
-                                <p class="text-body" style="font-size: 16px;">Edital em busca de artistas independentes
-                                    para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos
-                                    criativos e impactantes são requisitos para participação, visando inspirar e unir
-                                    comunidades através da arte.</p>
-                            </li>
-                            <li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° 0000 - Editora PA</h4>
-                                </a>
-                                <p class="text-body" style="font-size: 16px;">Edital em busca de artistas independentes
-                                    para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos
-                                    criativos e impactantes são requisitos para participação, visando inspirar e unir
-                                    comunidades através da arte.</p>
-                            </li>
-                            <li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° 0000 - Editora PA</h4>
-                                </a>
-                                <p class="text-body" style="font-size: 16px;">Edital em busca de artistas independentes
-                                    para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos
-                                    criativos e impactantes são requisitos para participação, visando inspirar e unir
-                                    comunidades através da arte</p>
-                            </li>
-                            <li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° 0000 - Editora PA</h4>
-                                </a>
-                                <p class="text-body" style="font-size: 16px;">Edital em busca de artistas independentes
-                                    para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos
-                                    criativos e impactantes são requisitos para participação, visando inspirar e unir
-                                    comunidades através da arte</p>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        fetch('./json/editais.json')
+            .then(res => res.json())
+            .then(({ editais }) => editais.forEach(el => {
+                const edital = `<li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
+                                    <h4 class="text-black">>> Edital n° ${el.id} - ${el.autor}</h4>
+                                    </a>
+                                    <p class="text-body" style="font-size: 16px;">${el.description}</p>
+                                </li>`
+                
+                const editaisDiv = document.getElementById('editais');
+                editaisDiv.insertAdjacentHTML('beforeend', edital);
+            }))
+            .catch(e => console.log(e))
+    </script>
     <%- include('partials/vlibras.ejs') %>
-    <%- include('partials/footer.ejs') %>
+        <%- include('partials/footer.ejs') %>
 </body>
 
 </html>
