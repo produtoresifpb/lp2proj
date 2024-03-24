@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head.ejs') %>
+        <title>Esqueceu a Senha</title>
+        <link rel="stylesheet" href="./stylesheets/senha.css">
+</head>
+
+<body>
+    <div style="display: flex; justify-content: center;">
+        <div class="container d-flex flex-column ">
+
+            <div style="display: flex; gap: 5px;color: #B4B4B4;">
+                <i class="bi bi-arrow-left"></i>
+                <p>Voltar</p>
+            </div>
+            <div class="titulo">
+                <h2>Redefinir a Senha</h2>
+            </div>
+            <p>Informe um email e enviamos um link para a recuperação da sua senha</p>
+            <p>E-mail</p>
+            <div class="mb-3" style="width: 100%;">
+                <input type="text" class="form-control" id="formGroupExampleInput"
+                    placeholder="Example input placeholder">
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-primary btn-lg">Enviar email de recuperação</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <%- include('partials/vlibras.ejs') %>
+</body>
+
+</html>
