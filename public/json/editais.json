@@ -13,12 +13,28 @@
         {
             "id": "0003",
             "description": "Edital em busca de artistas independentes para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos criativos e impactantes são requisitos para participação, visando inspirar e unir comunidades através da arte.",
-            "autor": "Editora PA"
+            "autor": "Danilo Cavalcante"
         },
         {
             "id": "0004",
             "description": "Edital em busca de artistas independentes para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos criativos e impactantes são requisitos para participação, visando inspirar e unir comunidades através da arte.",
             "autor": "Mateus Mendes"
+        },
+        {
+            "id": "0005",
+            "description": "Edital em busca de artistas independentes para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos criativos e impactantes são requisitos para participação, visando inspirar e unir comunidades através da arte.",
+            "autor": "Ricardo Junior"
+        },
+        {
+            "id": "0006",
+            "description": "Edital em busca de artistas independentes para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos criativos e impactantes são requisitos para participação, visando inspirar e unir comunidades através da arte.",
+            "autor": "Faelson Valerio"
+        },
+        {
+            "id": "0007",
+            "description": "Edital em busca de artistas independentes para impulsionar a cena cultural, priorizando diversidade e inclusão. Projetos criativos e impactantes são requisitos para participação, visando inspirar e unir comunidades através da arte.",
+            "autor": "Henrique"
         }
+
     ]
 }
