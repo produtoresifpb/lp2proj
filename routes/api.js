@@ -10,7 +10,7 @@ router.post('/editais/create', function(req, res, next) { // cria um edital
 
     const edital = {
         name: req.query.name,
-        author: req.query.autor,
+        author: req.query.author,
         creationDate,
         id: uuid.v4()
     }
