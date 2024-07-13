@@ -9,4 +9,5 @@ router.get('/edital', function(req, res, next) {
   res.render('edital');
 });
 
+
 module.exports = router;
