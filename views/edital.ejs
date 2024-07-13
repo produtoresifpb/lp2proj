@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <head>
     <%- include('partials/head.ejs') %>
-    <link rel="stylesheet" href="./stylesheets/edital.css" />
+    <link rel="stylesheet" href="../stylesheets/edital.css" />
     <title>Portal do Artista</title>
   </head>
 
@@ -58,9 +58,9 @@
                                 </li>`;
             editaisDiv.insertAdjacentHTML("beforeend", msg);
           }
-          editais.forEach((el) => {
+          editais.forEach((el, i) => {
             const edital = `<li class="list-group-item"><button onclick="openNotice()"><a href="#" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° ${el.id} - ${el.author}</h4>
+                                    <h4 class="text-black">>> Edital n° ${i +1 } - ${el.author}</h4>
                                     </a></button>
                                     <p class="text-body" style="font-size: 16px;">${el.description}</p>
                                 </li>`;

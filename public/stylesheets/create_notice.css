@@ -1,0 +1,20 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.geral{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 10px;
+    width: 40%;
+    border: 1px gray solid;
+    border-radius: 10px;
+}
