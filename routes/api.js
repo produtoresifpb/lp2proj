@@ -9,6 +9,7 @@ router.post('/editais/create', function(req, res, next) { // cria um edital
     const creationDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
 
     const edital = {
+        description: req.query.description,
         name: req.query.name,
         author: req.query.author,
         creationDate,
@@ -20,7 +21,7 @@ router.post('/editais/create', function(req, res, next) { // cria um edital
     res.status(201).json({
         message: 'Edital criado.',
         id: edital.id
-    })
+    })  
 
     console.log('[ DEBUG ] Edital criado com sucesso. Identificador dele: ' + edital.id)
     

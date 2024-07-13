@@ -48,7 +48,7 @@
       </div>
     </main>
     <script>
-      fetch("./json/editais.json")
+      fetch("/api/editais/list")
         .then((res) => res.json())
         .then(({ editais }) => {
           if (editais.length === 0) {
@@ -60,7 +60,7 @@
           }
           editais.forEach((el) => {
             const edital = `<li class="list-group-item"><button onclick="openNotice()"><a href="#" class="link-underline link-underline-opacity-0">
-                                    <h4 class="text-black">>> Edital n° ${el.id} - ${el.autor}</h4>
+                                    <h4 class="text-black">>> Edital n° ${el.id} - ${el.author}</h4>
                                     </a></button>
                                     <p class="text-body" style="font-size: 16px;">${el.description}</p>
                                 </li>`;
