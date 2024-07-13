@@ -8,5 +8,8 @@ router.get('/login', function(req, res, next) {
 router.get('/registro', function(req, res, next) {
   res.render('registro');
 });
+router.get('/resetsenha', function(req, res, next) {
+  res.render('recusenha');
+});
 
 module.exports = router;
