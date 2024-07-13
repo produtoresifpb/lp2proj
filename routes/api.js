@@ -4,18 +4,16 @@ const uuid = require('uuid')
 var router = express.Router();
 
 router.post('/editais/create', function(req, res, next) { // cria um edital
-    const { name, author, description } = req.body;
     const date = new Date()
     const creationDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
     
     const edital = {
-        description: description,
-        name: name,
-        author: author,
+        description: req.body.description,
+        name: req.body.name,
+        author: req.body.author,
         creationDate,
         id: uuid.v4()
     }
-    console.log(edital);
     
     editais.push(edital) // bota no array
 
