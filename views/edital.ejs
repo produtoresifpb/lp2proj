@@ -1,74 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-
+  <head>
     <%- include('partials/head.ejs') %>
-        <link rel="stylesheet" href="./stylesheets/edital.css">
-        <title>Portal do Artista</title>
-</head>
+    <link rel="stylesheet" href="./stylesheets/edital.css" />
+    <title>Portal do Artista</title>
+  </head>
 
-<body>
-    <header>
-        <%- include('partials/navbar.ejs') %>
-    </header>
+  <body>
+    <header><%- include('partials/navbar.ejs') %></header>
     <main>
-        <div id="content" , name="content" , class="main">
-            <div class="row justify-content-center">
-                <div class="col-11">
-                    <div class="box-bar">
-                        <div class="row row-cols-auto">
-                            <p class="col-8">Buscando por: <span>Editais recentes</span></p>
-                            <button class="btn"><span class="col">Filtrar <i
-                                        class="bi bi-filter"></i></i></span></button>
-                            <form class="d-flex col-3" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Buscar por editais"
-                                    aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit"><i
-                                        class="fa-solid fa-magnifying-glass"></i>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="container-edital">
-                        <ul class="list-group list-group-flush" id="editais">
-                            <span class="list-group-item" style="background-color: #64375E; color: white;">
-                            </span>
-                            <li class="list-group-item list-group-item-secondary" aria-current="true">
-                                <h4>Editais publicados</h4>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
+      <div id="content" , name="content" , class="main">
+        <div class="row justify-content-center">
+          <div class="col-11">
+            <div class="box-bar">
+              <div class="row row-cols-auto">
+                <p class="col-8">Buscando por: <span>Editais recentes</span></p>
+                <button class="btn">
+                  <span onclick="filterNotice()" class="col"
+                    >Filtrar <i class="bi bi-filter"></i
+                  ></span>
+                </button>
+                <form class="d-flex col-3" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Buscar por editais" aria-label="Search"/>
+                  <button class="btn btn-outline-success" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </form>
+              </div>
             </div>
+            <div class="container-edital">
+              <ul class="list-group list-group-flush" id="editais">
+                <span
+                  class="list-group-item"
+                  style="background-color: #64375e; color: white"
+                >
+                </span>
+                <li
+                  class="list-group-item list-group-item-secondary"
+                  aria-current="true"
+                >
+                  <h4>Editais publicados</h4>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
     <script>
-        fetch('./json/editais.json')
-            .then(res => res.json())
-            .then(({ editais }) => {
-                if (editais.length === 0) {
-                    const editaisDiv = document.getElementById('editais');
-                    const msg = `<li class="list-group-item">
+      fetch("./json/editais.json")
+        .then((res) => res.json())
+        .then(({ editais }) => {
+          if (editais.length === 0) {
+            const editaisDiv = document.getElementById("editais");
+            const msg = `<li class="list-group-item">
                                     <p>Nenhum edital encontrado</p>
                                 </li>`;
-                    editaisDiv.insertAdjacentHTML('beforeend', msg);
-                }
-                editais.forEach(el => {
-                    const edital = `<li class="list-group-item"><a href="" class="link-underline link-underline-opacity-0">
+            editaisDiv.insertAdjacentHTML("beforeend", msg);
+          }
+          editais.forEach((el) => {
+            const edital = `<li class="list-group-item"><button onclick="openNotice()"><a href="#" class="link-underline link-underline-opacity-0">
                                     <h4 class="text-black">>> Edital n° ${el.id} - ${el.autor}</h4>
-                                    </a>
+                                    </a></button>
                                     <p class="text-body" style="font-size: 16px;">${el.description}</p>
-                                </li>`
+                                </li>`;
 
-                    const editaisDiv = document.getElementById('editais');
-                    editaisDiv.insertAdjacentHTML('beforeend', edital);
-                })
-            })
-            .catch(e => console.log(e))
+            const editaisDiv = document.getElementById("editais");
+            editaisDiv.insertAdjacentHTML("beforeend", edital);
+          });
+        })
+        .catch((e) => console.log(e));
+
+      const openNotice = () => {
+        alert("faelson");
+      };
+      const filterNotice = () => {
+        alert("danilo");
+      };
     </script>
-    <%- include('partials/vlibras.ejs') %>
-        <%- include('partials/footer.ejs') %>
-</body>
-
+    <%- include('partials/vlibras.ejs') %> <%- include('partials/footer.ejs') %>
+  </body>
 </html>
