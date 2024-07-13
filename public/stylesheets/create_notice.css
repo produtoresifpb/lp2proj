@@ -11,10 +11,10 @@ body{
 }
 
 .box {
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     padding: 10px;
     width: 40%;
-    border: 1px gray solid;
+    border: 3px gray solid;
     border-radius: 10px;
 }
