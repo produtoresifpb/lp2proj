@@ -1,5 +1,14 @@
-body{
-    min-height: 100vh;
+main {
+    min-height: 87vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+}
+
+.box {
+    padding: 10px;
+    width: 30%;
+    border: 3px gray solid;
+    border-radius: 10px;
 }

@@ -18,8 +18,10 @@ router.post('/editais/create', function(req, res, next) { // cria um edital
         id: uuid.v4()
     }
     // console.log(edital);
+    
     editais.push(edital); // bota no array
     res.status(201).render('sucess', {edital});
+
     // console.log('[ DEBUG ] Edital criado com sucesso. Identificador dele: ' + edital.id);
 });
 
