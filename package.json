@@ -12,12 +12,16 @@
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "ejs": "~2.6.1",
-    "express": "~4.16.1",
+    "express": "~4.19.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+<<<<<<< HEAD
     "prisma": "^5.18.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
+=======
+    "uuid": "^10.0.0"
+>>>>>>> 997d46e52e437e49f1cb8271716260533cdf30d8
   }
 }

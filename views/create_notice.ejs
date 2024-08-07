@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <%- include('partials/head.ejs') %>
+    <link rel="stylesheet" href="../stylesheets/create_notice.css" />
+    <title>Portal do Artista</title>
+  </head>
+
+  <body>
+    <header><%- include('partials/navbar.ejs') %></header>
+    <main>
+      <div class="geral">
+        <div class="box">
+          <form action="/api/editais/create" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome do Edital</label>
+              <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">Nome do Autor</label>
+              <input type="text" name="author" class="form-control" id="author" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrição</label>
+              <textarea name="description" class="form-control" id="description" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script>
+      
+    </script>
+    <%- include('partials/vlibras.ejs') %> <%- include('partials/footer.ejs') %>
+  </body>
+</html>

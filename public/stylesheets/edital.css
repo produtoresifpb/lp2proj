@@ -1,3 +1,9 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .link-underline:hover {
     text-decoration: black underline !important;
 }
@@ -18,4 +24,8 @@
 .box-bar form input {
     background-color: #D9D9D9;
 }
-  
+
+li button {
+    border: none;
+    background: inherit;
+}

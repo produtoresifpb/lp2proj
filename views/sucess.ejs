@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <%- include('partials/head.ejs') %>
+    <link rel="stylesheet" href="../../stylesheets/sucess.css" />
+    <title>Portal do Artista</title>
+  </head>
+
+  <body>
+    <header><%- include('partials/navbar.ejs') %></header>
+    <main>
+      <div class="box">
+        <p>Edital <%= edital.id %> criado com sucesso. </p>
+        <p>Nome: <%= edital.name %></p>
+        <p>Autor: <%= edital.author %></p>
+        <p>Data de criação: <%= edital.creationDate %> </p>
+      </div>
+    </main>
+    <script>  
+      
+    </script>
+    <%- include('partials/vlibras.ejs') %> <%- include('partials/footer.ejs') %>
+  </body>
+</html>

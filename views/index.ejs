@@ -58,7 +58,7 @@
     </div>
   </div>
   <script>
-    fetch('./json/editais.json')
+    fetch("/api/editais/list")
       .then(res => res.json())
       .then(({ editais }) => {
         if (editais.length === 0) {
@@ -67,15 +67,22 @@
                                 <p>Nenhum edital encontrado</p>
                               </li>`;
           editaisDiv.insertAdjacentHTML('beforeend', msg);
+        } else {
+          for (let i = 0; i < editais.length; i++) {
+            const editaisDiv = document.getElementById('editais');
+            if (i > 6) {
+              const msg = `<li class="list-group-item">
+                                  <a href="/edital">Acesse outros editais</a>
+                                </li>`;
+              editaisDiv.insertAdjacentHTML('beforeend', msg);
+              break;
+            }
+            const edital = `<li class="list-group-item">
+                                  <p> Edital n° ${i+1}</p>
+                              </li>`
+            editaisDiv.insertAdjacentHTML('beforeend', edital);
+          }
         }
-        editais.forEach(el => {
-          const edital = `<li class="list-group-item">
-                                <p> Edital n° ${el.id}</p>
-                            </li>`
-
-          const editaisDiv = document.getElementById('editais');
-          editaisDiv.insertAdjacentHTML('beforeend', edital);
-        })
       })
       .catch(e => console.log(e))
   </script>
