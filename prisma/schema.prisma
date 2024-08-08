@@ -14,12 +14,12 @@ model User {
   password String
   profile  Int  @default(0)
 }
-
-// enum Role {
+// Type of Profile {
 //   PUBLIC - 0
 //   ARTIST - 1
 //   MANAGER - 2
 // }
+
 
 model Notice {
     id    Int     @id @default(autoincrement())
