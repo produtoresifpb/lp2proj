@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
+.container {
+  margin-top: 60px;
+  width: 26rem !important;
+  height: 26rem !important;
+  background-color: #e8e8e8;
+  border-radius: 35px;
+  padding: 30px;
+  box-shadow: 0 0 10px 0 gray !important;
+}
+
+.btn {
+  margin-top: 20px !important;
+  background-color: #723172 !important;
+  box-shadow: 0 0 10px 0 gray !important;
+  border: none;
+}
+
+.titulo {
+  font-family: "Abel", sans-serif;
+}

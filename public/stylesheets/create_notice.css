@@ -1,20 +1,20 @@
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.geral{
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+.geral {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .box {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    padding: 10px;
-    width: 40%;
-    border: 3px gray solid;
-    border-radius: 10px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 10px;
+  width: 40%;
+  border: 3px gray solid;
+  border-radius: 10px;
 }
