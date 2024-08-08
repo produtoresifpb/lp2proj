@@ -1,71 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 body {
-    background-image: url(../images/fundo-portal-do-artista.png);
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(../images/fundo-portal-do-artista.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .apresentation h1 {
-    font-family: "Abel", sans-serif;
-    font-size: 45px;
-    text-align: center;
-    margin-top: 3rem;
+  font-family: "Abel", sans-serif;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .apresentation img {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container {
-    background-color: #E8E8E8;
-    border-radius: 35px;
-    margin-top: 40px;
-    height: 26rem;
-    width: 23rem !important;
-    box-shadow: 0 0 10px 0 gray;
+  background-color: #e8e8e8;
+  border-radius: 35px;
+  margin-top: 40px;
+  height: 26rem;
+  width: 23rem !important;
+  box-shadow: 0 0 10px 0 gray;
 }
 
 .container a {
-    font-family: "Inter", sans-serif;
-    font-size: 12px;
-    color: #1FAEFF;
-    margin-left: 3px;
-    text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  color: #1faeff;
+  margin-left: 3px;
+  text-decoration: none;
 }
 
 .container h1 {
-    font-family: "Abel", sans-serif;
-    text-align: center;
-    font-size: 45px;
-    padding: 15px;
+  font-family: "Abel", sans-serif;
+  text-align: center;
+  font-size: 45px;
+  padding: 15px;
 }
 
 .register {
-    text-align: center;
-    padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 
 .btn {
-    display: block !important;
-    margin: auto !important;
-    font-family: "Inter", sans-serif !important;
-    background-color: #723172 !important;
-    color: white !important;
-    padding: 10px !important;
-    width: 150px !important;
-    border-radius: 16px !important;
-    box-shadow: 0 0 10px 0 gray !important;
+  display: block !important;
+  margin: auto !important;
+  font-family: "Inter", sans-serif !important;
+  background-color: #723172 !important;
+  color: white !important;
+  padding: 10px !important;
+  width: 150px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 10px 0 gray !important;
 }
 
 label {
-    font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-input{
-    font-family: "Inter", sans-serif;
-    height: 50px;
+input {
+  font-family: "Inter", sans-serif;
+  height: 50px;
 }

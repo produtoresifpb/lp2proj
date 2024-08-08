@@ -1,93 +1,75 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <%- include('partials/head.ejs') %>
-</head>
-
-<body>
-  <header>
-    <%- include('partials/navbar.ejs') %>
-  </header>
-  <div class="d-flex gap-3 container my-5">
+<div class="d-flex gap-3 container my-5">
     <aside>
-      <ul class="list-group list-group-flush" id="editais">
-        <span class="list-group-item" style="background-color: #64375E; color: white;">
-        </span>
-        <li class="list-group-item list-group-item-secondary" aria-current="true">
-          <h5><b>Editais publicados</b></h5>
-        </li>
-      </ul>
-      <ul class="list-group list-group-flush">
-        <span class="list-group-item" style="background-color: #64375E; color: white;">
-        </span>
-        <li class="list-group-item list-group-item-secondary" aria-current="true">
-          <h5><b>Buscar editais</b></h5>
-        </li>
-      </ul>
+        <ul class="list-group list-group-flush" id="editais">
+            <span class="list-group-item" style="background-color: #64375E; color: white;">
+            </span>
+            <li class="list-group-item list-group-item-secondary" aria-current="true">
+                <h5><b>Editais publicados</b></h5>
+            </li>
+        </ul>
+        <ul class="list-group list-group-flush">
+            <span class="list-group-item" style="background-color: #64375E; color: white;">
+            </span>
+            <li class="list-group-item list-group-item-secondary" aria-current="true">
+                <h5><b>Buscar editais</b></h5>
+            </li>
+        </ul>
     </aside>
     <div class="container w-75 mx-1">
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://www.ifpb.edu.br/patos/noticias/2016/11/campus-patos-recebe-visitas-de-escolas-publicas-e-privadas-da-regiao/img-20161103-wa0002-1.jpg/@@images/1af2a1a6-8c02-464b-8b41-0ec1a86061a1.jpeg"
-              class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://embrapii.org.br/wp-content/images/2018/11/ifpb_2000x1200_baixa_resolucao.jpg"
-              class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img
-              src="https://www.ifpb.edu.br/patos/noticias/2016/11/campus-patos-recebe-visitas-de-escolas-publicas-e-privadas-da-regiao/img-20161103-wa0002-1.jpg/@@images/1af2a1a6-8c02-464b-8b41-0ec1a86061a1.jpeg"
-              class="d-block w-100" alt="...">
-          </div>
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.ifpb.edu.br/patos/noticias/2016/11/campus-patos-recebe-visitas-de-escolas-publicas-e-privadas-da-regiao/img-20161103-wa0002-1.jpg/@@images/1af2a1a6-8c02-464b-8b41-0ec1a86061a1.jpeg"
+                        class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://embrapii.org.br/wp-content/images/2018/11/ifpb_2000x1200_baixa_resolucao.jpg"
+                        class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.ifpb.edu.br/patos/noticias/2016/11/campus-patos-recebe-visitas-de-escolas-publicas-e-privadas-da-regiao/img-20161103-wa0002-1.jpg/@@images/1af2a1a6-8c02-464b-8b41-0ec1a86061a1.jpeg"
+                        class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
     </div>
-  </div>
-  <script>
+</div>
+<script>
     fetch("/api/editais/list")
-      .then(res => res.json())
-      .then(({ editais }) => {
-        if (editais.length === 0) {
-          const editaisDiv = document.getElementById('editais');
-          const msg = `<li class="list-group-item">
-                                <p>Nenhum edital encontrado</p>
+        .then(res => res.json())
+        .then(({ editais }) => {
+            if (editais.length === 0) {
+                const editaisDiv = document.getElementById('editais');
+                const msg = `<li class="list-group-item">
+                              <p>Nenhum edital encontrado</p>
+                            </li>`;
+                editaisDiv.insertAdjacentHTML('beforeend', msg);
+            } else {
+                for (let i = 0; i < editais.length; i++) {
+                    const editaisDiv = document.getElementById('editais');
+                    if (i > 6) {
+                        const msg = `<li class="list-group-item">
+                                <a href="/edital">Acesse outros editais</a>
                               </li>`;
-          editaisDiv.insertAdjacentHTML('beforeend', msg);
-        } else {
-          for (let i = 0; i < editais.length; i++) {
-            const editaisDiv = document.getElementById('editais');
-            if (i > 6) {
-              const msg = `<li class="list-group-item">
-                                  <a href="/edital">Acesse outros editais</a>
-                                </li>`;
-              editaisDiv.insertAdjacentHTML('beforeend', msg);
-              break;
+                        editaisDiv.insertAdjacentHTML('beforeend', msg);
+                        break;
+                    }
+                    const edital = `<li class="list-group-item">
+                                <p> Edital n° ${i + 1}</p>
+                            </li>`
+                    editaisDiv.insertAdjacentHTML('beforeend', edital);
+                }
             }
-            const edital = `<li class="list-group-item">
-                                  <p> Edital n° ${i+1}</p>
-                              </li>`
-            editaisDiv.insertAdjacentHTML('beforeend', edital);
-          }
-        }
-      })
-      .catch(e => console.log(e))
-  </script>
-  <%- include('partials/vlibras.ejs') %>
-    <%- include('partials/footer.ejs') %>
-</body>
-
-</html>
+        })
+        .catch(e => console.log(e))
+</script>
