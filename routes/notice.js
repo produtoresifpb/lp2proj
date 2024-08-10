@@ -4,7 +4,8 @@ const { getAllNotices } = require("../models/notice.js");
 
 router.get("/", async function (req, res, next) {
   try {
-    const editais = await getAllNotices("");
+    const busca = req.query.busca;
+    const editais = await getAllNotices(busca || "");
     res.render("notice/edital", { editais: editais });
   } catch (err) {
     res.status(500).redirect("/", { error: err });

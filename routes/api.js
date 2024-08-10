@@ -16,6 +16,7 @@ router.post("/editais/create", async function (req, res, next) {
 });
 
 router.get("/editais/list", async function (req, res, next) {
+  // não sendo usado
   const busca = req.query.busca;
   const editais = await getAllNotices(busca || "");
   res.status(200).json(editais);

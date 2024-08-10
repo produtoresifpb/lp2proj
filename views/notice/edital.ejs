@@ -36,8 +36,7 @@
                         <% } else { %>
                             <% editais.forEach((el, i) => { %>
                                 <li class="list-group-item">
-                                    <!-- Fica apitando erro aqui mas ta funcionado... -->
-                                    <button onclick="openNotice(<%= i %>)">
+                                    <button onclick="openNotice(Number('<%= i %>'))">
                                         <a href="#" class="link-underline link-underline-opacity-0">
                                             <h4 class="text-black">>> Edital n° <%= i + 1 %> - <%= el.author %></h4>
                                         </a>
