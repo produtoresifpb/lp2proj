@@ -13,11 +13,6 @@ const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const apiRouter = require("./routes/api");
 
-const getAllUsers = require("./models/user");
-(async () => {
-  console.log(await getAllUsers());
-})();
-
 const app = express();
 
 // view engine setup
