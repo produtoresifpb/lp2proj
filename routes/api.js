@@ -1,25 +1,23 @@
 const express = require("express");
-const { editais } = require("../db.js");
-const uuid = require("uuid");
 const router = express.Router();
-const { getAllNotices } = require('../models/notice.js')
+const { getAllNotices, createNotice } = require('../models/notice.js')
 
 
-router.post("/editais/create", function (req, res, next) {
-  
+router.post("/editais/create", async function (req, res, next) {
+
   const edital = {
     description: req.body.description,
-    name: req.body.name,
+    title: req.body.name,
     author: req.body.author,
   };
 
-  editais.push(edital);
-  res.status(201).render("sucess", { edital });
-
+  const notice = await createNotice(edital)
+  res.status(201).render("sucess", { edital: notice });
 });
 
 router.get("/editais/list", async function (req, res, next) {
-  const editais = await getAllNotices()
+  const busca = req.query.busca
+  const editais = await getAllNotices(busca || '')
   res.status(200).json(editais);
 });
 
