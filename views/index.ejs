@@ -6,6 +6,23 @@
             <li class="list-group-item list-group-item-secondary" aria-current="true">
                 <h5><b>Editais publicados</b></h5>
             </li>
+            <% if (editais.length === 0) { %>
+                <li class="list-group-item">
+                    <p>Nenhum edital encontrado</p>
+                </li>
+            <% } else { %>
+                <% for (let i = 0; i < editais.length; i++) { %>
+                    <% if (i > 6) { %>
+                        <li class="list-group-item">
+                            <a href="/edital">Acesse outros editais</a>
+                        </li>
+                        <% break; %>
+                    <% } %>
+                    <li class="list-group-item">
+                        <p> Edital n° <%= i + 1 %></p>
+                    </li>
+                <% } %>
+            <% } %>
         </ul>
         <ul class="list-group list-group-flush">
             <span class="list-group-item" style="background-color: #64375E; color: white;">
@@ -45,31 +62,5 @@
     </div>
 </div>
 <script>
-    fetch("/api/editais/list")
-        .then(res => res.json())
-        .then(({ editais }) => {
-            if (editais.length === 0) {
-                const editaisDiv = document.getElementById('editais');
-                const msg = `<li class="list-group-item">
-                              <p>Nenhum edital encontrado</p>
-                            </li>`;
-                editaisDiv.insertAdjacentHTML('beforeend', msg);
-            } else {
-                for (let i = 0; i < editais.length; i++) {
-                    const editaisDiv = document.getElementById('editais');
-                    if (i > 6) {
-                        const msg = `<li class="list-group-item">
-                                <a href="/edital">Acesse outros editais</a>
-                              </li>`;
-                        editaisDiv.insertAdjacentHTML('beforeend', msg);
-                        break;
-                    }
-                    const edital = `<li class="list-group-item">
-                                <p> Edital n° ${i + 1}</p>
-                            </li>`
-                    editaisDiv.insertAdjacentHTML('beforeend', edital);
-                }
-            }
-        })
-        .catch(e => console.log(e))
+
 </script>
