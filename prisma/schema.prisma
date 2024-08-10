@@ -27,3 +27,16 @@ model Notice {
   author      String
   description String
 }
+
+
+model Evento {
+  EventoID        Int       @id @default(autoincrement())
+  NomeEvento      String
+  Descricao       String?
+  DataHora        DateTime
+  Localizacao     String
+  Organizador     String
+  InfoIngresso    String?
+  ImagemCartaz    String?
+  DataPublicacao  DateTime
+}
