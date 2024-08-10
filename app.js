@@ -12,6 +12,7 @@ const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const apiRouter = require("./routes/api");
+const noticeRouter = require("./routes/notice");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/edital", noticeRouter);
 app.use("/auth", authRouter);
 app.use("/api", apiRouter);
 // app.use('/users', usersRouter);
