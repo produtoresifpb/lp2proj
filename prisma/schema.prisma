@@ -23,4 +23,6 @@ model User {
 model Notice {
   id    Int     @id @default(autoincrement())
   title String @unique
+  author String
+  description String
 }
