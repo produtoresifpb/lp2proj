@@ -8,11 +8,12 @@ generator client {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
-  profile  Int    @default(0)
+  id                Int                 @id @default(autoincrement())
+  email             String              @unique
+  name              String
+  password          String
+  profile           Int                 @default(0)
+  InscricoesEventos InscricoesEventos[]
 }
 
 // Type of Profile {
@@ -28,15 +29,35 @@ model Notice {
   description String
 }
 
-
 model Evento {
-  EventoID        Int       @id @default(autoincrement())
-  NomeEvento      String
-  Descricao       String?
-  DataHora        DateTime
-  Localizacao     String
-  Organizador     String
-  InfoIngresso    String?
-  ImagemCartaz    String?
-  DataPublicacao  DateTime
+  EventoID          Int                 @id @default(autoincrement())
+  NomeEvento        String
+  Descricao         String?
+  DataHora          DateTime
+  Localizacao       String
+  Organizador       String
+  InfoIngresso      String?
+  ImagemCartaz      String?
+  DataPublicacao    DateTime
+  InscricoesEventos InscricoesEventos[]
+}
+
+model InscricoesEventos {
+  InscricaoEventoID Int      @id @default(autoincrement())
+  Evento            Evento   @relation(fields: [EventoID], references: [EventoID])
+  EventoID          Int
+  Usuario           User     @relation(fields: [UsuarioID], references: [id])
+  UsuarioID         Int
+  DataInscricao     DateTime
+}
+
+model ProjetosColaborativos {
+  ProjetoID             Int      @id @default(autoincrement())
+  Titulo                String
+  Descricao             String
+  AreaAtuacaoNecessaria String
+  Localizacao           String?
+  TipoColaboracao       String
+  CriadorID             Int
+  DataCriacao           DateTime 
 }
