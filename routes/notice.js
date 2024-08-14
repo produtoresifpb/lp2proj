@@ -6,6 +6,7 @@ router.get("/", async function (req, res, next) {
   try {
     const busca = req.query.busca;
     const editais = await getAllNotices(busca || "");
+    console.log(editais);
     res.render("notice/edital", { editais: editais });
   } catch (err) {
     res.status(500).redirect("/", { error: err });

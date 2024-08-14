@@ -1,4 +1,4 @@
-<head>
+;jkfelçaifha<head>
     <link rel="stylesheet" href="/stylesheets/edital.css">
     <script defer src="/javascripts/notice.js"></script>
 </head>
@@ -55,9 +55,12 @@
             <span class="close-btn" onclick="closeNotice()">&times;</span>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>
+            <i class="bi bi-chat-right-text-fill"></i>
         </div>
     </div>
 </main>
 <script defer>
-    const editais = JSON.parse('<%- JSON.stringify(editais) %>');
+    const cleanJson = '<%- JSON.stringify(editais) %>'.replace(/[\x00-\x1F\x7F-\x9F]/g, '\\n');
+    const editais = JSON.parse(cleanJson);
+    console.log(editais)
 </script>
