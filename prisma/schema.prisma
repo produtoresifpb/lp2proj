@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:ifpb@localhost:5432/mydb"
+  url      = "postgresql://env(DB_USER):env(DB_PASSWD)@env(DB_HOST):env(DB_PORT)/env(DB_NAME)"
 }
 
 generator client {
