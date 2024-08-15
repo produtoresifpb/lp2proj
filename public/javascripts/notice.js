@@ -5,10 +5,12 @@ window.onload = () => {
 function openNotice(index) {
   const edital = editais[index];
   if (edital) {
-    document.getElementById("editalTitle").innerText = `Edital n° ${
+    document.getElementById("noticeTitle").innerText = `Edital n° ${
       index + 1
     } - ${edital.author}`;
-    document.getElementById("editalDescription").innerText = edital.description;
+    document.getElementById("subscriptionDate").innerText = new Date(edital.dataPublicacao).toISOString().split('T')[0];
+    document.getElementById("criteriosSelecao").innerText = edital.criteriosSelecao;
+    // document.getElementById("editalDescription").innerText = edital.description;
     document.getElementById("editalOverlay").classList.remove("hidden");
   }
 }

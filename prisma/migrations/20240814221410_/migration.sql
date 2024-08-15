@@ -1,10 +1,13 @@
+-- CreateEnum
+CREATE TYPE "Profile" AS ENUM ('PUBLIC', 'ARTIST', 'MANAGER');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "profile" INTEGER NOT NULL DEFAULT 0,
+    "profile" "Profile" NOT NULL DEFAULT 'PUBLIC',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

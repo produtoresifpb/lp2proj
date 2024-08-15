@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://env(DB_USER):env(DB_PASSWD)@env(DB_HOST):env(DB_PORT)/env(DB_NAME)"
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 generator client {
@@ -18,17 +18,22 @@ model User {
   email             String              @unique
   name              String
   password          String
-  profile           Profile                 @default(PUBLIC)
+  profile           Profile             @default(PUBLIC)
   InscricoesEventos InscricoesEventos[]
 }
 
-
-
 model Notice {
-  id          Int    @id @default(autoincrement())
-  title       String @unique
-  author      String
-  description String
+  id                    Int      @id @default(autoincrement())
+  title                 String   @unique
+  author                String
+  description           String
+  artisticCategory      String
+  subscriptionDeadline  DateTime
+  detalhesFinanciamento String
+  criteriosSelecao      String
+  processoInscricao     String
+  organizador           String
+  dataPublicacao        DateTime @default(now())
 }
 
 model Evento {
@@ -61,5 +66,5 @@ model ProjetosColaborativos {
   Localizacao           String?
   TipoColaboracao       String
   CriadorID             Int
-  DataCriacao           DateTime 
+  DataCriacao           DateTime
 }

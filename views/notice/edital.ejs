@@ -1,12 +1,11 @@
-;jkfelçaifha<head>
+<head>
     <link rel="stylesheet" href="/stylesheets/edital.css">
     <script defer src="/javascripts/notice.js"></script>
 </head>
 
 <main>
-    <div id="content" , name="content" , class="main">
+    <div id="content" , name="content" , class="container">
         <div class="row justify-content-center">
-            <div class="col-11">
                 <div class="box-bar">
                     <div class="row row-cols-auto">
                         <p class="col-8">Buscando por: <span>Editais recentes</span></p>
@@ -22,41 +21,69 @@
                         </form>
                     </div>
                 </div>
-                <div class="container-edital">
-                    <ul class="list-group list-group-flush" id="editais">
-                        <span class="list-group-item" style="background-color: #64375e; color: white">
-                        </span>
-                        <li class="list-group-item list-group-item-secondary" aria-current="true">
-                            <h4>Editais publicados</h4>
-                        </li>
-                        <% if (!editais.length) { %>
-                            <li class="list-group-item">
-                                <p>Nenhum edital encontrado</p>
+                <div class="container-edital m-2">
+                    <div >
+                        <ul class="list-group list-group-flush" id="editais">
+                            <span class="list-group-item rounded-top" style="background-color: #64375e; color: white">
+                            </span>
+                            <li class="list-group-item list-group-item-secondary rounded-bottom" aria-current="true">
+                                <h4>Editais publicados  - <%= editais.length %> Resultados</h4>
                             </li>
-                        <% } else { %>
-                            <% editais.forEach((el, i) => { %>
+                            <% if (!editais.length) { %>
                                 <li class="list-group-item">
-                                    <button onclick="openNotice(Number('<%= i %>'))">
-                                        <a href="#" class="link-underline link-underline-opacity-0">
-                                            <h4 class="text-black">>> Edital n° <%= i + 1 %> - <%= el.author %></h4>
-                                        </a>
-                                    </button>
-                                    <p class="text-body" style="font-size: 16px;"><%= el.description %></p>
+                                    <p>Nenhum edital encontrado</p>
                                 </li>
-                            <% }); %>
-                        <% } %>
-                    </ul>
+                            <% } else { %>
+                                <% editais.forEach((el, i) => { %>
+                                    <ul class="list-group">
+                                        <li class="list-group-item rounded  mt-2 notice-item shadow-sm" onclick="openNotice(Number('<%= i %>'))">
+                                          <p href="#" class="link-underline link-underline-opacity-0 mb-0">
+                                            <h4 class="text-light mb-0">Edital n° <%= i + 1 %> - <%= el.author %></h4>
+                                          </p>
+                                          <p class="text-light" style="font-size: 16px;"><%= el.description %></p>
+                                        </li>
+                                      </ul>
+                                <% }); %>
+                            <% } %>
+                        </ul>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
     <div id="editalOverlay" class="overlay hidden">
         <div class="overlay-content">
             <span class="close-btn" onclick="closeNotice()">&times;</span>
+            <form>
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="noticeTitle">Edital:</label>
+                        <span id="noticeTitle"></span>
+                        <hr>
+                    </div>
+                    <div class="form-item">
+                        <label for="vaga">Vaga pretendida:</label>
+                        <select	name="vaga" id="vaga">
+                            <option value="cantor">Cantor</option>
+                            <option value="pintor">Pintor</option>
+                            <option value="tecladista">Tecladista</option>
+                            <option value="baterista">Baterista</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row p-2">
+                    <label for="subscriptionDate" class="">Data de Inscrição: </label>
+                    <span id="subscriptionDate"></span>
+                </div>
+                <div class="form-row p-2">
+                    <label for="criteriosSelecao">Critério de seleção: </label>
+                    <span id="criteriosSelecao"></span>
+                </div>
+                <button type="button" class="btn btn-danger">Inscrever</button>
+            </form>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>
-            <i class="bi bi-chat-right-text-fill"></i>
-        </div>
+            <a href="/views/feedback.ejs" style="color: black; margin-right: 100%;"><i class="bi bi-chat-right-text-fill"></i></a>
+       </div>
     </div>
 </main>
 <script defer>

@@ -8,10 +8,18 @@ router.post("/editais/create", async function (req, res, next) {
       title: req.body.title,
       author: req.body.author,
       description: req.body.description,
+      artisticCategory: req.body.artisticCategory,
+      subscriptionDeadline: new Date(req.body.subscriptionDeadline).toISOString(),
+      criteriosSelecao: req.body.criteriosSelecao,
+      processoInscricao: req.body.processoInscricao,
+      organizador:  req.body.organizador,
+      detalhesFinanciamento: req.body.detalhesFinanciamento,
+      dataPublicacao: new Date().toISOString()
     });
     res.status(201).render("notice/sucess", { edital: notice });
   } catch (err) {
     res.status(500).render("notice/create_notice", { error: err });
+    console.log(err)
   }
 });
 

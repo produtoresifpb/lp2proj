@@ -1,7 +1,13 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #64375E;">
-    <div class="container">
-        <a class="navbar-brand mb-0 h1 text-white" href="/"><img width="170px" style="filter: invert(1);"
-                src="../../images/logo-portal-do-artista.png"></a>
+<head>
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    
+</head>
+
+<nav class="navbar navbar-expand-lg p-3" style="background-color: #64375E;">
+    <div class="container-lg">
+        <a class="navbar-brand mb-0 h1 text-white" href="/" id="logo-hover">
+            <img width="170px" style="filter: invert(1);" src="/images/logo-portal-do-artista.png">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,18 +19,9 @@
                 <li class="nav-item"><a href="/edital/create" class="nav-link active text-white">Criar Edital</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><button class="btn btn-secondary me-2" type="submit"><i
-                            class="fa-solid fa-bell text-white"></i></button></li>
                 <li class="nav-item"><a href="/auth/login" class="btn btn-secondary me-2 text-white"
                         role="button">Entrar</a></li>
                 <li class="nav-item"><a href="/auth/registro" class="btn btn-secondary me-2" role="button">Cadastrar</a>
-                </li>
-                <li class="nav-item">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-secondary" type="submit"><i
-                                class="fa-solid fa-magnifying-glass text-white"></i></button>
-                    </form>
                 </li>
             </ul>
         </div>

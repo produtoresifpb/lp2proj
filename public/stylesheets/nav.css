@@ -1,0 +1,9 @@
+#logo-hover img {
+    transition: transform 0.2s ease-in-out;
+}
+
+#logo-hover img:hover {
+    transform: scale(0.9);
+    filter: invert(0.8); 
+}
+
