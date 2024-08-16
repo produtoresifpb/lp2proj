@@ -1,5 +1,5 @@
 # Portal do Artista 🖌
-Projeto para a disciplina de Linguagem de Programação II do curso técnico de Informática - IFPB
+Projeto para a disciplina de Linguagem de Programação II e Projeto Integrador II do curso técnico de Informática - IFPB
 
 ### Motivação
 Num contexto cultural, artistas enfrentam dificuldades para expor seus trabalhos e ganhar a sua visibilidade, muitas vezes pela falta de patrocínios ou eventos de exposição.  
