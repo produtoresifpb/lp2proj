@@ -56,12 +56,12 @@
             <form>
                 <div class="form-row">
                     <div class="form-item">
-                        <label for="noticeTitle">Edital:</label>
+                        <label style="font-weight: bold"  for="noticeTitle">Edital:</label>
                         <span id="noticeTitle"></span>
                         <hr>
                     </div>
                     <div class="form-item">
-                        <label for="vaga">Vaga pretendida:</label>
+                        <label style="font-weight: bold"  for="vaga">Vaga pretendida:</label>
                         <select	name="vaga" id="vaga">
                             <option value="cantor">Cantor</option>
                             <option value="pintor">Pintor</option>
@@ -70,15 +70,16 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row p-2">
-                    <label for="subscriptionDate" class="">Data de Inscrição: </label>
+                <div class="furm p-2" style="width: 100%;">
+                    <label for="subscriptionDate" style="font-weight: bold">Data de Inscrição:</label>
                     <span id="subscriptionDate"></span>
                 </div>
-                <div class="form-row p-2">
-                    <label for="criteriosSelecao">Critério de seleção: </label>
+                <hr>
+                <div class="furm p-2">
+                    <label for="criteriosSelecao" style="font-weight: bold">Critério de seleção:</label>
                     <span id="criteriosSelecao"></span>
                 </div>
-                <button type="button" class="btn btn-danger">Inscrever</button>
+                <button type="button" class="btn btn-danger shadow-lg" style="background-color: #64375E; margin-left: 80%; border: none">Inscrever</button>
             </form>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>

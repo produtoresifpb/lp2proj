@@ -85,6 +85,14 @@ li button {
 
 }
 
+.furm{
+  display: flex;
+  flex-direction: column; /* Adiciona direção de coluna */
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
 .form-item {
   display: flex;
   flex-direction: column;
