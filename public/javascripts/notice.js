@@ -6,7 +6,7 @@ function openNotice(index) {
   const edital = editais[index];
   if (edital) {
     document.getElementById("noticeTitle").innerText = `Edital n° ${
-      index + 1
+      edital.id
     } - ${edital.author}`;
     document.getElementById("subscriptionDate").innerText = new Date(edital.dataPublicacao).toISOString().split('T')[0];
     document.getElementById("criteriosSelecao").innerText = edital.criteriosSelecao;

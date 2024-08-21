@@ -46,8 +46,8 @@
                     <p>Nenhum edital encontrado</p>
                 </li>
                 <% } else { %>
-                    <% for (let i=0; i < editais.length; i++) { %>
-                        <% if (i> 6) { %>
+                    <% for (let i=editais.length-1; i >= 0; i--) { %>
+                        <% if (i < editais.length-6) { %>
                             <li class="list-group-item list-group-item-secondary rounded-top" aria-current="true">
                                 <h6><a href="/edital" style="color: black; text-decoration: none; cursor: pointer;">Acesse outros editais   <i class="bi bi-arrow-right"></i></a></h6>
                             </li>
@@ -55,15 +55,15 @@
                                 <span class="list-group-item rounded-bottom"
                                     style="background-color: #64375E; color: white;">
                                 </span>
-                                <% break; %>
-                                    <% } %>
-                                        <li class="list-group-item">
-                                            <p> Edital n° <%= i + 1 %>
-                                            </p>
-                                        </li>
-                                        <% } %>
-                                            <% } %>
                             </ul>
+                                <% break; %>
+                        <% } %>
+                        <li class="list-group-item">
+                            <p> Edital n° <%= editais[i].id %>
+                            </p>
+                        </li>
+                    <% } %>
+                <% } %>
     </aside>
     <div class="container w-75 mx-1">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">

@@ -1,15 +1,27 @@
 const { prisma } = require("../prisma/prisma");
 
-async function getAllNotices(param) {
+async function getAllNotices(query, filter, filterValue) {
   const allNotices = await prisma.notice.findMany({
     where: {
       OR: [
-        { title: { contains: param }},
-        { author: { contains: param }},
-        { description: { contains: param }}
+        { title: { contains: query }},
+        { author: { contains: query }},
+        { description: { contains: query }}
       ]
     }
   });
+  switch(filter) {
+    case 'recent':
+      allNotices.sort((a, b) => b.dataPublicacao - a.dataPublicacao)
+    break
+    case 'category':
+      allNotices.filter(document => document.artisticCategory == filterValue)
+    break
+    case 'apoio':
+      allNotices.filter(document => document.detalhesFinanciamento == filterValue)
+    break
+  
+  }
   return allNotices;
 }
 

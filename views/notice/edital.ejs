@@ -6,48 +6,62 @@
 <main>
     <div id="content" , name="content" , class="container">
         <div class="row justify-content-center">
-                <div class="box-bar">
-                    <div class="row row-cols-auto">
-                        <p class="col-8">Buscando por: <span>Editais recentes</span></p>
-                        <button class="btn">
-                            <span onclick="filterNotice()" class="col">Filtrar <i class="bi bi-filter"></i></span>
+            <div class="box-bar">
+                <div class="row row-cols-auto">
+                    <p class="col-7">Buscando por: <span>Editais recentes</span></p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Products</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-header">Categoria Artística</div>
+                            <a href="#" class="dropdown-item">Mobiles</a>
+                            <a href="#" class="dropdown-item">Tablets</a>
+                            <a href="#" class="dropdown-item">Laptops</a>
+                            <div class="dropdown-header">Apoio</div>
+                            <a href="#" class="dropdown-item">Apoio A</a>
+                            <a href="#" class="dropdown-item">Apoio B</a>
+                        </div>
+                    </div>
+                    <form class="d-flex col-3" role="search" id="buscar-edital"
+                        enctype="application/x-www-form-urlencoded">
+                        <input class="form-control me-2" type="search" id="busca" name="b"
+                            placeholder="Buscar por editais" aria-label="Search" id="busca-parametro" />
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <form class="d-flex col-3" role="search" id="buscar-edital" enctype="application/x-www-form-urlencoded">
-                            <input class="form-control me-2" type="search" id="busca" name="busca" placeholder="Buscar por editais"
-                                aria-label="Search" id="busca-parametro"/>
-                            <button class="btn btn-outline-success" type="submit">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </form>
-                    </div>
+                    </form>
                 </div>
-                <div class="container-edital m-2">
-                    <div >
-                        <ul class="list-group list-group-flush" id="editais">
-                            <span class="list-group-item rounded-top" style="background-color: #64375e; color: white">
-                            </span>
-                            <li class="list-group-item list-group-item-secondary rounded-bottom" aria-current="true">
-                                <h4>Editais publicados  - <%= editais.length %> Resultados</h4>
+            </div>
+            <div class="container-edital m-2">
+                <div>
+                    <ul class="list-group list-group-flush" id="editais">
+                        <span class="list-group-item rounded-top" style="background-color: #64375e; color: white">
+                        </span>
+                        <li class="list-group-item list-group-item-secondary rounded-bottom" aria-current="true">
+                            <h4>Editais publicados - <%= editais.length %> Resultados</h4>
+                        </li>
+                        <% if (!editais.length) { %>
+                            <li class="list-group-item">
+                                <p>Nenhum edital encontrado</p>
                             </li>
-                            <% if (!editais.length) { %>
-                                <li class="list-group-item">
-                                    <p>Nenhum edital encontrado</p>
-                                </li>
                             <% } else { %>
-                                <% editais.forEach((el, i) => { %>
+                                <% editais.forEach((el, i)=> { %>
                                     <ul class="list-group">
-                                        <li class="list-group-item rounded  mt-2 notice-item shadow-sm" onclick="openNotice(Number('<%= i %>'))">
-                                          <p href="#" class="link-underline link-underline-opacity-0 mb-0">
-                                            <h4 class="text-light mb-0">Edital n° <%= i + 1 %> - <%= el.author %></h4>
-                                          </p>
-                                          <p class="text-light" style="font-size: 16px;"><%= el.description %></p>
+                                        <li class="list-group-item rounded  mt-2 notice-item shadow-sm"
+                                            onclick="openNotice(Number('<%= i %>'))">
+                                            <p href="#" class="link-underline link-underline-opacity-0 mb-0">
+                                            <h4 class="text-light mb-0">Edital n° <%= el.id %> - <%= el.author %>
+                                            </h4>
+                                            </p>
+                                            <p class="text-light" style="font-size: 16px;">
+                                                <%= el.description %>
+                                            </p>
                                         </li>
-                                      </ul>
-                                <% }); %>
-                            <% } %>
-                        </ul>
-                    </div>
+                                    </ul>
+                                    <% }); %>
+                                        <% } %>
+                    </ul>
                 </div>
+            </div>
         </div>
     </div>
     <div id="editalOverlay" class="overlay hidden">
@@ -56,13 +70,13 @@
             <form>
                 <div class="form-row">
                     <div class="form-item">
-                        <label style="font-weight: bold"  for="noticeTitle">Edital:</label>
+                        <label style="font-weight: bold" for="noticeTitle">Edital:</label>
                         <span id="noticeTitle"></span>
                         <hr>
                     </div>
                     <div class="form-item">
-                        <label style="font-weight: bold"  for="vaga">Vaga pretendida:</label>
-                        <select	name="vaga" id="vaga">
+                        <label style="font-weight: bold" for="vaga">Vaga pretendida:</label>
+                        <select name="vaga" id="vaga">
                             <option value="cantor">Cantor</option>
                             <option value="pintor">Pintor</option>
                             <option value="tecladista">Tecladista</option>
@@ -79,12 +93,14 @@
                     <label for="criteriosSelecao" style="font-weight: bold">Critérios de seleção:</label>
                     <span id="criteriosSelecao"></span>
                 </div>
-                <button type="button" class="btn btn-danger shadow-lg" style="background-color: #64375E; margin-left: 80%; border: none">Inscrever</button>
+                <button type="button" class="btn btn-danger shadow-lg"
+                    style="background-color: #64375E; margin-left: 80%; border: none">Inscrever</button>
             </form>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>
-            <a href="/views/feedback.ejs" style="color: black; margin-right: 100%;"><i class="bi bi-chat-right-text-fill"></i></a>
-       </div>
+            <a href="/views/feedback.ejs" style="color: black; margin-right: 100%;"><i
+                    class="bi bi-chat-right-text-fill"></i></a>
+        </div>
     </div>
 </main>
 <script defer>
