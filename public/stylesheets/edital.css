@@ -79,6 +79,16 @@ li button {
   color: #333;
 }
 
+.btn-filter {
+  background-color: #d9d9d9;
+  border: 1px solid #acacac;
+}
+
+.btn-filter:hover {
+  background-color: #acacac;
+  border: 1px solid black;
+}
+
 .form-row {
   display: flex;
   margin-bottom: .5rem;
@@ -147,4 +157,26 @@ li button {
 .form-item select:focus,
 .form-item textarea:focus {
   border-color: blue;
+}
+
+.filter-container {
+  position: absolute;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  z-index: 1;
+  right: 32%;
+  top: 20%;
+}
+
+.filter-row {
+  display: flex;
+  margin-bottom: .5rem;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0;
 }
