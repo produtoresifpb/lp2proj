@@ -1,6 +1,6 @@
 const { prisma } = require("../prisma/prisma");
 
-async function getAllNotices(query, filter, filterValue) {
+async function getAllNotices(query, filter) {
   const allNotices = await prisma.notice.findMany({
     where: {
       OR: [

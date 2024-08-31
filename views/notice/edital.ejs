@@ -1,6 +1,5 @@
 <head>
     <link rel="stylesheet" href="/stylesheets/edital.css">
-    <script defer src="/javascripts/notice.js"></script>
 </head>
 
 <main>
@@ -8,23 +7,88 @@
         <div class="row justify-content-center">
             <div class="box-bar">
                 <div class="row row-cols-auto">
-                    <p class="col-7">Buscando por: <span>Editais recentes</span></p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Products</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div class="dropdown-header">Categoria Artística</div>
-                            <a href="#" class="dropdown-item">Mobiles</a>
-                            <a href="#" class="dropdown-item">Tablets</a>
-                            <a href="#" class="dropdown-item">Laptops</a>
-                            <div class="dropdown-header">Apoio</div>
-                            <a href="#" class="dropdown-item">Apoio A</a>
-                            <a href="#" class="dropdown-item">Apoio B</a>
-                        </div>
+                    <p class="col-8">Filtrando por: <span><%- (filtro.order === "recentes"
+                                                            || !filtro.order)
+                                                            ? "Mais recentes" 
+                                                            : "Mais antigos" %></span></p>
+                    <button class="btn btn-filter" id="filter-btn">
+                        <span class="col"><i class="bi bi-filter"></i> Filtrar</span>
+                    </button>
+                    <div class="filter-container hidden" id="filter">
+                        <form enctype="application/x-www-form-urlencoded"
+                        autocomplete="off">
+                            <input type="hidden" name="b" value="<%= busca || "" %>">
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="filterOrder">Filtrar por:</label>
+                                    <select name="flt" id="filterOrder">
+                                        <option value="recentes">Mais recentes</option>
+                                        <option value="antigos">Mais antigos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="dataPrazo">Prazo de Inscrição:</label>
+                                    <input type="date"name="dt" id="dataPrazo"
+                                    value="<%= filtro.prazo || "" %>">
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="apoioTipo">Tipo de apoio:</label>
+                                    <select name="ap" id="apoioTipo">
+                                        <option value="" selected>Selecione uma opção</option>
+                                        <option value="financeiro">Financeiro</option>
+                                        <option value="logistico">Logístico</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="categoriaArtistica">Categoria Artística:</label>
+                                    <select name="cta" id="categoriaArtistica">
+                                        <option value="" selected>Selecione uma opção</option>
+                                        <option value="musica">Música</option>
+                                        <option value="teatro">Teatro</option>
+                                        <option value="danca">Dança</option>
+                                        <option value="artes">Artes Visuais</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="valor-minimo">Financiamento mínimo:</label>
+                                    <input type="text" name="vlrmn" id="valor-minimo"
+                                    value="<%= filtro.valorMin || "" %>">
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-item">
+                                    <label for="valor-maximo">Financiamento máximo:</label>
+                                    <input type="text" name="vlrmx" id="valor-maximo"
+                                    value="<%= filtro.valorMax || "" %>">
+                                </div>
+                            </div>
+                            <div class="filter-row" style="justify-content: flex-end;">
+                                <button type="button" onclick="clearFilter()"
+                                class="btn btn-danger" style="margin-right: .5rem;">Limpar</button>
+                                <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+                        </form>
                     </div>
                     <form class="d-flex col-3" role="search" id="buscar-edital"
-                        enctype="application/x-www-form-urlencoded">
+                        enctype="application/x-www-form-urlencoded"
+                        autocomplete="off">
                         <input class="form-control me-2" type="search" id="busca" name="b"
-                            placeholder="Buscar por editais" aria-label="Search" id="busca-parametro" />
+                            placeholder="Buscar por editais" aria-label="Search" id="busca-parametro" 
+                            value="<%= busca || "" %>" />
+                        <input type="hidden" name="flt" value="<%= filtro.order || "" %>">
+                        <input type="hidden" name="dt" value="<%= filtro.prazo || "" %>">
+                        <input type="hidden" name="ap" value="<%= filtro.apoio || "" %>">
+                        <input type="hidden" name="cta" value="<%= filtro.categoria || "" %>">
+                        <input type="hidden" name="vlrmn" value="<%= filtro.valorMin || "" %>">
+                        <input type="hidden" name="vlrmx" value="<%= filtro.valorMax || "" %>">
                         <button class="btn btn-outline-success" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -37,28 +101,28 @@
                         <span class="list-group-item rounded-top" style="background-color: #64375e; color: white">
                         </span>
                         <li class="list-group-item list-group-item-secondary rounded-bottom" aria-current="true">
-                            <h4>Editais publicados - <%= editais.length %> Resultados</h4>
+                            <h4>Editais publicados - <%= editais.length %> Resultado<%- (editais.length > 1) ? "s" : "" %></h4>
                         </li>
                         <% if (!editais.length) { %>
                             <li class="list-group-item">
                                 <p>Nenhum edital encontrado</p>
                             </li>
-                            <% } else { %>
-                                <% editais.forEach((el, i)=> { %>
-                                    <ul class="list-group">
-                                        <li class="list-group-item rounded  mt-2 notice-item shadow-sm"
-                                            onclick="openNotice(Number('<%= i %>'))">
-                                            <p href="#" class="link-underline link-underline-opacity-0 mb-0">
-                                            <h4 class="text-light mb-0">Edital n° <%= el.id %> - <%= el.author %>
-                                            </h4>
-                                            </p>
-                                            <p class="text-light" style="font-size: 16px;">
-                                                <%= el.description %>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                    <% }); %>
-                                        <% } %>
+                        <% } else { %>
+                            <% editais.forEach((el, i)=> { %>
+                                <ul class="list-group">
+                                    <li class="list-group-item rounded  mt-2 notice-item shadow-sm"
+                                        onclick="openNotice(Number('<%= i %>'))">
+                                        <p href="#" class="link-underline link-underline-opacity-0 mb-0">
+                                        <h4 class="text-light mb-0">Edital n° <%= el.id %> - <%= el.title %>
+                                        </h4>
+                                        </p>
+                                        <p class="text-light" style="font-size: 16px;">
+                                            <%= el.description %>
+                                        </p>
+                                    </li>
+                                </ul>
+                            <% }); %>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -98,13 +162,18 @@
             </form>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>
-            <a href="/views/feedback.ejs" style="color: black; margin-right: 100%;"><i
+            <a href="#" style="color: black; margin-right: 100%;"><i
                     class="bi bi-chat-right-text-fill"></i></a>
         </div>
     </div>
 </main>
+<script src="/javascripts/notice.js"></script>
 <script defer>
     const cleanJson = '<%- JSON.stringify(editais) %>'.replace(/[\x00-\x1F\x7F-\x9F]/g, '\\n');
     const editais = JSON.parse(cleanJson);
-    console.log(editais)
+    const filterDrops = [
+        `<%= filtro.order || "recentes" %>`, 
+        `<%= filtro.apoio || "" %>`, 
+        `<%= filtro.categoria || "" %>`
+    ];
 </script>
