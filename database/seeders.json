@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "email": "danilo@email.com",
+            "password": "123456",
+            "name": "danilo",
+            "profile": "ADMIN"
+        },
+        {
+            "id": 2,
+            "email": "faelson@email.com",
+            "password": "123456",
+            "name": "faelson",
+            "profile": "ADMIN"
+        }
+    ],
+    "notices": [
+        {
+            "id": 1,
+            "title": "Edital 1",
+            "description": "Edital 1",
+            "user_id": 2
+        }
+    ]
+}
