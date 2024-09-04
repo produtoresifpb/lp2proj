@@ -6,35 +6,36 @@ async function getAllNotices(query, filter) {
       AND: [
         {
           OR: [
-            { title: { contains: query }},
-            { author: { contains: query }},
-            { description: { contains: query }}
-          ]
+            { title: { contains: query } },
+            { author: { contains: query } },
+            { description: { contains: query } },
+          ],
         },
         {
           subscriptionDeadline: {
-            lte: new Date(filter.prazo || '2050-12-12'),
+            lte: new Date(filter.prazo || "2050-12-12"),
           },
+        },
+        {
+          artisticCategory: filter.categoria ? filter.categoria : undefined
         }
       ],
-      artisticCategory: {
-        status: filter.categoria || ''
-      }
     },
     orderBy: {
-      dataPublicacao:  (filter.order == 'recentes' || !filter.order) ? 'desc' : 'asc'
-    }
+      dataPublicacao:
+        filter.order == "recentes" || !filter.order ? "desc" : "asc",
+    },
   });
 
-  return allNotices
+  return allNotices;
 }
 
 async function createNotice(data) {
-  const notice = await prisma.notice.create({ data })
-  return notice
+  const notice = await prisma.notice.create({ data });
+  return notice;
 }
 
 module.exports = {
   getAllNotices,
-  createNotice
-}
+  createNotice,
+};

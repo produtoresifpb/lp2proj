@@ -14,11 +14,12 @@ function openNotice(index) {
       edital.id
     } - ${edital.title}`;
     const date = new Date(edital.dataPublicacao);
+    const day = date.getDate();
     const month = date.getMonth() + 1;
     const formattedMonth = month < 10 ? `0${month}` : month;
-    document.getElementById("subscriptionDate").innerText = `${date.getDate()}/${formattedMonth}/${date.getFullYear()}`;
+    const formattedDay = day < 10 ? `0${day}` : day;
+    document.getElementById("subscriptionDate").innerText = `${formattedDay}/${formattedMonth}/${date.getFullYear()}`;
     document.getElementById("criteriosSelecao").innerText = edital.criteriosSelecao;
-    // document.getElementById("editalDescription").innerText = edital.description;
     document.getElementById("editalOverlay").classList.remove("hidden");
   }
 }

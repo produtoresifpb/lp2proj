@@ -13,7 +13,6 @@ router.get("/", async function (req, res, next) {
       valorMin: req.query.vlrmn || "",
       valorMax: req.query.vlrmx || "",
     };
-    console.log(filtro)
     const editais = await getAllNotices(busca, filtro);
     res.render("notice/edital", {
       editais: editais,
