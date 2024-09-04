@@ -23,17 +23,24 @@ model User {
 }
 
 model Notice {
-  id                    Int      @id @default(autoincrement())
-  title                 String   @unique
+  id                    Int              @id @default(autoincrement())
+  title                 String           @unique
   author                String
   description           String
-  artisticCategory      String
+  artisticCategory      artisticCategory
   subscriptionDeadline  DateTime
   detalhesFinanciamento String
   criteriosSelecao      String
   processoInscricao     String
   organizador           String
-  dataPublicacao        DateTime @default(now())
+  dataPublicacao        DateTime         @default(now())
+}
+
+enum artisticCategory {
+  MUSIC
+  THEATER
+  DANCE
+  ARTS
 }
 
 model Evento {
