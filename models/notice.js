@@ -3,26 +3,30 @@ const { prisma } = require("../prisma/prisma");
 async function getAllNotices(query, filter) {
   const allNotices = await prisma.notice.findMany({
     where: {
-      OR: [
-        { title: { contains: query }},
-        { author: { contains: query }},
-        { description: { contains: query }}
-      ]
+      AND: [
+        {
+          OR: [
+            { title: { contains: query }},
+            { author: { contains: query }},
+            { description: { contains: query }}
+          ]
+        },
+        {
+          subscriptionDeadline: {
+            lte: new Date(filter.prazo || '2050-12-12'),
+          },
+        }
+      ],
+      artisticCategory: {
+        status: filter.categoria || ''
+      }
+    },
+    orderBy: {
+      dataPublicacao:  (filter.order == 'recentes' || !filter.order) ? 'desc' : 'asc'
     }
   });
-  switch(filter) {
-    case 'recent':
-      allNotices.sort((a, b) => b.dataPublicacao - a.dataPublicacao)
-    break
-    case 'category':
-      allNotices.filter(document => document.artisticCategory == filterValue)
-    break
-    case 'apoio':
-      allNotices.filter(document => document.detalhesFinanciamento == filterValue)
-    break
-  
-  }
-  return allNotices;
+
+  return allNotices
 }
 
 async function createNotice(data) {
