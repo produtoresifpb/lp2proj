@@ -2,10 +2,12 @@ const Database = require('../database/database.js');
 
 async function getAllNotices() {
   const db = await Database.connect();
-
-  const sql = 'SELECT * FROM Notice';
+  const sql = `
+    SELECT Notice.*, User.*
+    FROM Notice
+    INNER JOIN User ON Notice.user_id = User.id
+  `;
   const editais = await db.all(sql);
-  
   return editais;
 }
 

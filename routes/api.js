@@ -17,12 +17,7 @@ router.post('/editais/create', async function (req, res, next) {
 
 router.get('/editais/list', async function (req, res, next) {
   const editais = await getAllNotices();
-  const users = []
-  for (const edital of editais) {
-    const user = await getUserById(edital.user_id)
-    users.push(user)
-  }
-  res.status(200).json({ editais, users });
+  res.status(200).json({ editais });
 });
 
 module.exports = router;
