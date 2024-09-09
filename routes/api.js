@@ -5,6 +5,7 @@ const { getAllUsers, getUserById } = require('../models/user');
 
 router.post('/editais/create', async function (req, res, next) {
   const users = await getAllUsers();
+  console.log(users)
   const edital = {
     description: req.body.description,
     title: req.body.title,
