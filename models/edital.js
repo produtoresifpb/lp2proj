@@ -20,7 +20,6 @@ async function getNoticeById(id) {
 
 async function create({ title, description, user_id }) {
   const db = await Database.connect();
-
   const sql = 'INSERT INTO Notice (title, description, user_id) VALUES (?, ?, ?)';
   const { lastID } = await db.run(sql, [title, description, user_id]);
   return await getNoticeById(lastID);

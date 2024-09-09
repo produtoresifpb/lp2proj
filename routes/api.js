@@ -8,7 +8,7 @@ router.post('/editais/create', async function (req, res, next) {
   const edital = {
     description: req.body.description,
     title: req.body.title,
-    user_id: users[0].id,
+    user_id: req.body.conta,
   };
 
   const newEdital = await create(edital)
