@@ -10,8 +10,8 @@ router.get("/", async function (req, res, next) {
       prazo: req.query.dt || "",
       apoio: req.query.ap || "",
       categoria: req.query.cta || "",
-      valorMin: req.query.vlrmn || "",
-      valorMax: req.query.vlrmx || "",
+      valorMin: parseFloat(req.query.vlrmn) || "",
+      valorMax: parseFloat(req.query.vlrmx) || "",
     };
     const editais = await getAllNotices(busca, filtro);
     res.render("notice/edital", {

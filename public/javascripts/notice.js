@@ -48,7 +48,7 @@ const clearFilter = () => {
   categoriaArtistica = document.getElementById("categoriaArtistica");
   valorMin = document.getElementById("valor-minimo");
   valorMax = document.getElementById("valor-maximo");
-
+ 
   filterOrder.value = "recentes";
   dataPrazo.value = "";
   apoioTipo.value = "";

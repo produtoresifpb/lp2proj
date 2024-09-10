@@ -18,7 +18,13 @@ async function getAllNotices(query, filter) {
         },
         {
           artisticCategory: filter.categoria ? filter.categoria : undefined
-        }
+        },
+        {
+          valorFinanciamento: {
+            gte: filter.valorMin || undefined,
+            lte: filter.valorMax || undefined, 
+        },
+      },
       ],
     },
     orderBy: {

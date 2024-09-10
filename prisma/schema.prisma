@@ -30,6 +30,7 @@ model Notice {
   artisticCategory      artisticCategory
   subscriptionDeadline  DateTime
   detalhesFinanciamento String
+  valorFinanciamento    Float? 
   criteriosSelecao      String
   processoInscricao     String
   organizador           String

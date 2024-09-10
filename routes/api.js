@@ -14,6 +14,7 @@ router.post("/editais/create", async function (req, res, next) {
       processoInscricao: req.body.processoInscricao,
       organizador:  req.body.organizador,
       detalhesFinanciamento: req.body.detalhesFinanciamento,
+      valorFinanciamento: parseFloat(req.body.valorFinanciamento),
       dataPublicacao: new Date().toISOString()
     });
     res.status(201).render("notice/sucess", { edital: notice });
