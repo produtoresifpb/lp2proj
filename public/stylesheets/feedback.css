@@ -1,0 +1,19 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .geral {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .box {
+    padding: 10px;
+    width: 40%;
+    border: 3px gray solid;
+    border-radius: 10px;
+  }

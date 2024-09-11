@@ -1,0 +1,40 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/feedback.css">
+</head>
+
+<main>
+    <div class="geral">
+        <div class="box">
+            <form action="/api/editais/create" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="artisticCategory" class="form-label">Assunto</label>
+                    <select name="artisticCategory" id="categoriaArtistica" required>
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="MUSIC">Música</option>
+                        <option value="THEATER">Teatro</option>
+                        <option value="DANCE">Dança</option>
+                        <option value="ARTS">Artes Visuais</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrição do problema</label>
+                    <textarea name="description" class="form-control" id="description" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Referência do edital (ID ou título)</label>
+                    <textarea name="description" class="form-control" id="description" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+
+
+    </form>
+</main>

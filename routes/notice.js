@@ -6,12 +6,12 @@ router.get("/", async function (req, res, next) {
   try {
     const busca = req.query.b || "";
     const filtro = {
-      order: req.query.flt || "",
-      prazo: req.query.dt || "",
-      apoio: req.query.ap || "",
-      categoria: req.query.cta || "",
-      valorMin: parseFloat(req.query.vlrmn) || "",
-      valorMax: parseFloat(req.query.vlrmx) || "",
+      order: req.query.flt || undefined,
+      prazo: req.query.dt || undefined,
+      apoio: req.query.ap || undefined,
+      categoria: req.query.cta || undefined,
+      valorMin: parseFloat(req.query.vlrmn) || undefined,
+      valorMax: parseFloat(req.query.vlrmx) || undefined,
     };
     const editais = await getAllNotices(busca, filtro);
     res.render("notice/edital", {
@@ -26,6 +26,10 @@ router.get("/", async function (req, res, next) {
 
 router.get("/create", function (req, res, next) {
   res.render("notice/create_notice");
+});
+
+router.get("/feedback", function (req, res, next) {
+  res.render("notice/feedback");
 });
 
 module.exports = router;

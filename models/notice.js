@@ -17,15 +17,15 @@ async function getAllNotices(query, filter) {
           },
         },
         {
-          artisticCategory: filter.categoria ? filter.categoria : undefined
+          artisticCategory:   filter.categoria 
         },
         {
-          support: filter.apoio ? filter.apoio : undefined
+          support:   filter.apoio 
         },
         {
           valorFinanciamento: {
-            gte: filter.valorMin || undefined,
-            lte: filter.valorMax || undefined, 
+            gte: filter.valorMin,
+            lte: filter.valorMax 
         },
       },
       ],
