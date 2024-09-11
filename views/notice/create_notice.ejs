@@ -19,8 +19,16 @@
                     <textarea name="description" class="form-control" id="description" required></textarea>
                 </div>
                 <div class="mb-3">
+                    <label for="support" class="form-label">Tipo de apoio</label>
+                    <select name="support" id="support" required>
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="FINANCIAL">Financeiro</option>
+                        <option value="LOGISTIC">Logístico</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="artisticCategory" class="form-label">Categoria Artística</label>
-                    <select name="artisticCategory" id="categoriaArtistica">
+                    <select name="artisticCategory" id="categoriaArtistica" required>
                         <option value="" selected>Selecione uma opção</option>
                         <option value="MUSIC">Música</option>
                         <option value="THEATER">Teatro</option>

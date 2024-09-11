@@ -20,6 +20,9 @@ async function getAllNotices(query, filter) {
           artisticCategory: filter.categoria ? filter.categoria : undefined
         },
         {
+          support: filter.apoio ? filter.apoio : undefined
+        },
+        {
           valorFinanciamento: {
             gte: filter.valorMin || undefined,
             lte: filter.valorMax || undefined, 

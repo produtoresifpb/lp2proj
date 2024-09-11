@@ -39,8 +39,8 @@
                                     <label for="apoioTipo">Tipo de apoio:</label>
                                     <select name="ap" id="apoioTipo">
                                         <option value="" selected>Selecione uma opção</option>
-                                        <option value="financeiro">Financeiro</option>
-                                        <option value="logistico">Logístico</option>
+                                        <option value="FINANCIAL">Financeiro</option>
+                                        <option value="LOGISTIC">Logístico</option>
                                     </select>
                                 </div>
                             </div>
@@ -167,8 +167,7 @@
         </div>
     </div>
 </main>
-<script src="/javascripts/notice.js"></script>
-<script defer>
+<script>
     const cleanJson = '<%- JSON.stringify(editais) %>'.replace(/[\x00-\x1F\x7F-\x9F]/g, '\\n');
     const editais = JSON.parse(cleanJson);
     const filterDrops = [
@@ -177,3 +176,4 @@
         `<%= filtro.categoria || "" %>`
     ];
 </script>
+<script src="/javascripts/notice.js"></script>

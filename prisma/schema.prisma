@@ -7,12 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Profile {
-  PUBLIC
-  ARTIST
-  MANAGER
-}
-
 model User {
   id                Int                 @id @default(autoincrement())
   email             String              @unique
@@ -27,21 +21,15 @@ model Notice {
   title                 String           @unique
   author                String
   description           String
+  support               supportType
   artisticCategory      artisticCategory
   subscriptionDeadline  DateTime
   detalhesFinanciamento String
-  valorFinanciamento    Float? 
+  valorFinanciamento    Float
   criteriosSelecao      String
   processoInscricao     String
   organizador           String
   dataPublicacao        DateTime         @default(now())
-}
-
-enum artisticCategory {
-  MUSIC
-  THEATER
-  DANCE
-  ARTS
 }
 
 model Evento {
@@ -75,4 +63,22 @@ model ProjetosColaborativos {
   TipoColaboracao       String
   CriadorID             Int
   DataCriacao           DateTime
+}
+
+enum Profile {
+  PUBLIC
+  ARTIST
+  MANAGER
+}
+
+enum artisticCategory {
+  MUSIC
+  THEATER
+  DANCE
+  ARTS
+}
+
+enum supportType {
+  FINANCIAL
+  LOGISTIC
 }
