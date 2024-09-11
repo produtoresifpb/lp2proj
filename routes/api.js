@@ -8,19 +8,21 @@ router.post("/editais/create", async function (req, res, next) {
       title: req.body.title,
       author: req.body.author,
       description: req.body.description,
+      support: req.body.support,
       artisticCategory: req.body.artisticCategory,
-      subscriptionDeadline: new Date(req.body.subscriptionDeadline).toISOString(),
+      subscriptionDeadline: new Date(
+        req.body.subscriptionDeadline
+      ).toISOString(),
       criteriosSelecao: req.body.criteriosSelecao,
       processoInscricao: req.body.processoInscricao,
-      organizador:  req.body.organizador,
+      organizador: req.body.organizador,
       detalhesFinanciamento: req.body.detalhesFinanciamento,
       valorFinanciamento: parseFloat(req.body.valorFinanciamento),
-      dataPublicacao: new Date().toISOString()
+      dataPublicacao: new Date().toISOString(),
     });
     res.status(201).render("notice/sucess", { edital: notice });
   } catch (err) {
     res.status(500).render("notice/create_notice", { error: err });
-    console.log(err)
   }
 });
 
