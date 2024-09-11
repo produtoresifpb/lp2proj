@@ -1,11 +1,16 @@
-window.onload = () => {
-  filterOrder = document.getElementById("filterOrder");
-  apoioTipo = document.getElementById("apoioTipo");
-  categoriaArtistica = document.getElementById("categoriaArtistica");
-  filterOrder.value = filterDrops[0];
-  apoioTipo.value = filterDrops[1];
-  categoriaArtistica.value = filterDrops[2];
-}
+const filterBtn = document.getElementById("filter-btn");
+const filter = document.getElementById("filter");
+
+const filterOrder = document.getElementById("filterOrder");
+const dataPrazo = document.getElementById("dataPrazo");
+const apoioTipo = document.getElementById("apoioTipo");
+const categoriaArtistica = document.getElementById("categoriaArtistica");
+const valorMin = document.getElementById("valor-minimo");
+const valorMax = document.getElementById("valor-maximo");
+
+filterOrder.value = filterDrops[0];
+apoioTipo.value = filterDrops[1];
+categoriaArtistica.value = filterDrops[2];
 
 function openNotice(index) {
   const edital = editais[index];
@@ -28,27 +33,17 @@ const closeNotice = () => {
   document.getElementById("editalOverlay").classList.add("hidden");
 };
 
-const filterBtn = document.getElementById("filter-btn");
 filterBtn.addEventListener("click", () => {
-  const filter = document.getElementById("filter");
   filter.classList.toggle("hidden");
 });
 
 document.addEventListener("click", (event) => {
-  const filter = document.getElementById("filter");
   if (!filter.contains(event.target) && !filterBtn.contains(event.target)) {
     filter.classList.add("hidden");
   }
 });
 
 const clearFilter = () => {
-  filterOrder = document.getElementById("filterOrder");
-  dataPrazo = document.getElementById("dataPrazo");
-  apoioTipo = document.getElementById("apoioTipo");
-  categoriaArtistica = document.getElementById("categoriaArtistica");
-  valorMin = document.getElementById("valor-minimo");
-  valorMax = document.getElementById("valor-maximo");
- 
   filterOrder.value = "recentes";
   dataPrazo.value = "";
   apoioTipo.value = "";
