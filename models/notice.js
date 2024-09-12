@@ -13,21 +13,21 @@ async function getAllNotices(query, filter) {
         },
         {
           subscriptionDeadline: {
-            lte: new Date(filter.prazo || "2050-12-12"),
+            lte: new Date(filter.prazo || "2077-12-31"),
           },
         },
         {
-          artisticCategory:   filter.categoria 
+          artisticCategory: filter.categoria,
         },
         {
-          support:   filter.apoio 
+          support: filter.apoio,
         },
         {
           valorFinanciamento: {
             gte: filter.valorMin,
-            lte: filter.valorMax 
+            lte: filter.valorMax,
+          },
         },
-      },
       ],
     },
     orderBy: {

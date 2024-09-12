@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-/* Tive q desativar os layouts nesseS pra tirar a navbar e o footer */
+/* Tive q desativar os layouts nesses pra tirar a navbar e o footer */
 router.get("/login", function (req, res, next) {
   res.render("login", { layout: false });
 });
