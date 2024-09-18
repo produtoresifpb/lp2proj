@@ -15,6 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a href="/" class="nav-link active text-white">Início</a></li>
+                <li class="nav-item" id="showNotice"><a href="#" class="nav-link active text-white">Favoritos</a></li>
                 <li class="nav-item"><a href="/edital" class="nav-link active text-white">Editais</a></li>
                 <li class="nav-item"><a href="/edital/create" class="nav-link active text-white">Criar Edital</a></li>
             </ul>
@@ -27,3 +28,9 @@
         </div>
     </div>
 </nav>
+<script>
+    document.getElementById('showNotice').addEventListener('click', () => {
+        const editais = JSON.parse(localStorage.getItem("editais") || '[]'); 
+        alert(`Editais salvos:\n\n${editais.map(edital => 'ID: ' + edital.id).join('\n')}`)
+    })
+</script>

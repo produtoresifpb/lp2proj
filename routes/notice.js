@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getAllNotices } = require("../models/notice.js");
+const { getAllNotices, getNoticeById } = require("../models/notice.js");
+const { createNoticeFeedback } = require("../models/noticeFeedback.js");
 
 router.get("/", async function (req, res, next) {
   try {
@@ -28,8 +29,26 @@ router.get("/create", function (req, res, next) {
   res.render("notice/create_notice");
 });
 
-router.get("/feedback", function (req, res, next) {
-  res.render("notice/feedback");
+router.get("/feedback/:id", async function (req, res, next) {
+  const editalID = parseInt(req.params.id);
+  res.render("notice/feedback", { editalID });
 });
+
+router.post("/feedback/:id", async function (req, res, next) {
+  try {
+    const noticeFeedback = await createNoticeFeedback({
+      userName: req.body.name,
+      userEmail: req.body.email,
+      problemSubject: req.body.subject,
+      problemDescription: req.body.descriptionProblem,
+      noticeID: parseInt(req.params.id)
+    });
+
+    res.status(201).render("notice/sucessfeedback", { edital: noticeFeedback });
+  } catch (err) {
+    console.log(err)
+    res.status(500).render("notice/feedback", { error: err });
+  }
+})
 
 module.exports = router;

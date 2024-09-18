@@ -19,7 +19,7 @@ model User {
 model Notice {
   id                    Int              @id @default(autoincrement())
   title                 String           @unique
-  author                String
+  organizador           String
   description           String
   support               supportType
   artisticCategory      artisticCategory
@@ -28,8 +28,18 @@ model Notice {
   valorFinanciamento    Float
   criteriosSelecao      String
   processoInscricao     String
-  organizador           String
   dataPublicacao        DateTime         @default(now())
+  FeedbackNotice        FeedbackNotice[]
+}
+
+model FeedbackNotice {
+  id                 Int      @id @default(autoincrement())
+  userName           String
+  userEmail          String
+  problemSubject     Subjects
+  problemDescription String
+  Notice             Notice   @relation(fields: [noticeID], references: [id])
+  noticeID           Int
 }
 
 model Evento {
@@ -65,6 +75,8 @@ model ProjetosColaborativos {
   DataCriacao           DateTime
 }
 
+//------------------------------------------------------------------------//
+
 enum Profile {
   PUBLIC
   ARTIST
@@ -81,4 +93,11 @@ enum artisticCategory {
 enum supportType {
   FINANCIAL
   LOGISTIC
+}
+
+enum Subjects {
+  informationOutdated
+  informationWrong
+  error
+  other
 }

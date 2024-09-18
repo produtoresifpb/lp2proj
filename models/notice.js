@@ -6,14 +6,14 @@ async function getAllNotices(query, filter) {
       AND: [
         {
           OR: [
-            { title: { contains: query } },
-            { author: { contains: query } },
-            { description: { contains: query } },
+            { title: { contains: query, mode: 'insensitive' } },
+            { organizador: { contains: query, mode: 'insensitive'} },
+            { description: { contains: query, mode: 'insensitive'} },
           ],
         },
         {
           subscriptionDeadline: {
-            lte: new Date(filter.prazo || "2077-12-31"),
+            lte: new Date(filter.prazo || "2077-12-31"), // Data padrão
           },
         },
         {
@@ -39,6 +39,15 @@ async function getAllNotices(query, filter) {
   return allNotices;
 }
 
+async function getNoticeById(id) {
+  const notice = await prisma.notice.findUnique({
+    where: {
+      id: id
+    }
+  });
+  return notice;
+}
+
 async function createNotice(data) {
   const notice = await prisma.notice.create({ data });
   return notice;
@@ -46,5 +55,6 @@ async function createNotice(data) {
 
 module.exports = {
   getAllNotices,
+  getNoticeById,
   createNotice,
 };

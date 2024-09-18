@@ -132,38 +132,57 @@
         <div class="overlay-content">
             <span class="close-btn" onclick="closeNotice()">&times;</span>
             <form>
-                <div class="form-row">
+                <div class="form-row" style="margin-top: 35px;">
                     <div class="form-item">
                         <label style="font-weight: bold" for="noticeTitle">Edital:</label>
                         <span id="noticeTitle"></span>
                         <hr>
                     </div>
                     <div class="form-item">
-                        <label style="font-weight: bold" for="vaga">Vaga pretendida:</label>
-                        <select name="vaga" id="vaga">
-                            <option value="cantor">Cantor</option>
-                            <option value="pintor">Pintor</option>
-                            <option value="tecladista">Tecladista</option>
-                            <option value="baterista">Baterista</option>
-                        </select>
+                        <label style="font-weight: bold" for="vaga">Categoria:</label>
+                        <span id="artisticCategory"></span>
+                        <hr>
                     </div>
                 </div>
                 <div class="furm p-2" style="width: 100%;">
-                    <label for="subscriptionDate" style="font-weight: bold">Data de Inscrição:</label>
-                    <span id="subscriptionDate"></span>
+                    <label for="subscriptionDeadline" style="font-weight: bold">Prazo de Inscrição:</label>
+                    <span id="subscriptionDeadline"></span>
                 </div>
                 <hr>
                 <div class="furm p-2">
-                    <label for="criteriosSelecao" style="font-weight: bold">Critérios de seleção:</label>
-                    <span id="criteriosSelecao"></span>
+                    <label for="description" style="font-weight: bold">Descrição:</label>
+                    <span id="description"></span>
+                    
                 </div>
-                <button type="button" class="btn btn-danger shadow-lg"
-                    style="background-color: #64375E; margin-left: 80%; border: none">Inscrever</button>
+                <div class="form-row hidden" id="hidden">
+                    <div class="furm p-2" style="width: 100%;">
+                        <label for="processoInscricao" style="font-weight: bold">Processo de inscrição:</label>
+                        <span id="processoInscricao"></span>
+                    </div>
+                    <div class="furm p-2" style="width: 100%;">
+                        <label for="criteriosSelecao" style="font-weight: bold">Critérios de seleção:</label>
+                        <span id="criteriosSelecao"></span>
+                    </div>
+                </div>
+                <hr>
+                <div style="display: flex; gap: 30px; align-items: center; margin-top: 2rem;">
+                    
+                    <button type="button" class="btn btn-danger shadow-lg"
+                    style="background-color: #64375E; border: none">Inscrever</button>
+                  
+                    <button type="button" id="showMore" class="btn btn-danger shadow-lg"
+                    style="background-color: #64375E; border: none">Mais informações</button>
+                    <button type="button" class="btn btn-danger shadow-lg"
+                    style="background-color: #64375E; border: none" id="favoritar" onclick="">Favoritar</button>
+                </div>
+                
             </form>
             <h4 id="editalTitle"></h4>
             <p id="editalDescription"></p>
-            <a href="/edital/feedback" style="color: black; margin-right: 100%;"><i
+                <div class="fb">
+                    <a id="feedback" style="color: black; margin-left: 93%;"><i
                     class="bi bi-chat-right-text-fill"></i></a>
+                </div>
         </div>
     </div>
 </main>
