@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 body {
-  background-image: url(../images/fundo2.png);
+  background-image: url(../images/registro.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -23,7 +23,7 @@ body {
 .container {
   background-color: #e8e8e8;
   border-radius: 35px;
-  margin: 40px auto;
+  margin: 75px auto;
   height: auto;
   width: 50rem !important;
   box-shadow: 0 0 10px 0 gray;
@@ -36,13 +36,15 @@ body {
 
 .form-container {
   display: flex;
+  flex-direction: column;
   width: 800px;
 }
 
 .left-column,
 .right-column {
   flex: 1;
-  padding: 0 10px;
+  padding: 0 18px;
+  margin: 0;
 }
 
 .left-column {

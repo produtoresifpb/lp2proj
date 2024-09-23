@@ -12,6 +12,9 @@ model User {
   email             String              @unique
   name              String
   password          String
+  cpf               String?             @unique
+  birthDate         DateTime?
+  registerDate      DateTime            @default(now())
   profile           Profile             @default(PUBLIC)
   InscricoesEventos InscricoesEventos[]
 }
