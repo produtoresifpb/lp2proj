@@ -40,8 +40,7 @@ body {
   width: 800px;
 }
 
-.left-column,
-.right-column {
+.left-column {
   flex: 1;
   padding: 0 18px;
   margin: 0;
@@ -49,10 +48,6 @@ body {
 
 .left-column {
   margin-right: 10px;
-}
-
-.right-column {
-  margin-left: 10px;
 }
 
 .mb-3 {
