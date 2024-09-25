@@ -68,16 +68,14 @@
                 if (res.status == 400) {
                     Swal.fire({
                         icon: "error",
-                        title: e.message,
-                        showConfirmButton: false,
-                        timer: 1500
+                        title: data.message,
+                        showConfirmButton: true,
                     });
                 } else {
                     Swal.fire({
                         icon: "success",
                         title: 'Conta criada com sucesso',
-                        showConfirmButton: false,
-                        timer: 1500
+                        showConfirmButton: true,
                     });
                 }
             }).catch(e => {
