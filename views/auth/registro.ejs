@@ -44,17 +44,34 @@
                 <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha">
             </div>
             <div class="mb-3">
+                <p class="text-danger visually-hidden" id="alertaSenha">As senhas são diferentes</p>
                 <label for="confirmarSenha" class="form-label">Confirmação de Senha</label>
                 <input type="password" name="password2" class="form-control" id="confirmarSenha"
                     placeholder="Confirme sua senha">
             </div>
         </div>
-        <button type="submit" class="btn">Registrar</button>
+        <button type="submit" id="submitButton" class="btn">Registrar</button>
 </div>
 </form>
 </div>
 <%- include('../partials/vlibras.ejs') %>
     <script>
+
+        const confirmarSenha = document.getElementById('confirmarSenha')
+        const alertaSenha = document.getElementById('alertaSenha')
+        const submitButton = document.getElementById('submitButton')
+        
+        confirmarSenha.addEventListener('input', (e) => {
+            const senha = document.getElementById('senha')
+            if (senha.value != confirmarSenha.value) {
+                alertaSenha.classList.remove('visually-hidden')
+                submitButton.disabled = true
+            } else {
+                alertaSenha.classList.add('visually-hidden')
+                submitButton.disabled = false
+            }
+        })
+
         const registroForm = document.getElementById('registroForm')
         registroForm.addEventListener('submit', (e) => {
             e.preventDefault()

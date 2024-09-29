@@ -1,0 +1,43 @@
+{
+    "notices": [
+        {
+            "title": "Festival de Música 2024",
+            "organizador": "Associação Cultural",
+            "description": "Participe do maior festival de música do ano, com artistas renomados e novas promessas.",
+            "support": "FINANCIAL",
+            "artisticCategory": "MUSIC",
+            "subscriptionDeadline": "2024-05-01T23:59:59Z",
+            "detalhesFinanciamento": "Financiamento total para artistas selecionados.",
+            "valorFinanciamento": 15000.00,
+            "criteriosSelecao": "Análise de portfólio e proposta artística.",
+            "processoInscricao": "Envio de propostas através do nosso site.",
+            "dataPublicacao": "2024-01-15T10:00:00Z"
+        },
+        {
+            "title": "Mostra de Teatro Experimental",
+            "organizador": "Cia. de Teatro Inovação",
+            "description": "Um espaço para novos dramaturgos e suas criações.",
+            "support": "LOGISTIC",
+            "artisticCategory": "THEATER",
+            "subscriptionDeadline": "2024-04-15T23:59:59Z",
+            "detalhesFinanciamento": "Apoio logístico para ensaios e apresentações.",
+            "valorFinanciamento": 8000.00,
+            "criteriosSelecao": "Textos originais e inovadores.",
+            "processoInscricao": "Envio de roteiros e propostas até a data limite.",
+            "dataPublicacao": "2024-02-20T10:00:00Z"
+        },
+        {
+            "title": "Festival de Dança do Brasil",
+            "organizador": "Rede Nacional de Dança",
+            "description": "Celebre a dança com performances de grupos de todo o país.",
+            "support": "FINANCIAL",
+            "artisticCategory": "DANCE",
+            "subscriptionDeadline": "2024-06-10T23:59:59Z",
+            "detalhesFinanciamento": "Bolsa de apoio para as melhores performances.",
+            "valorFinanciamento": 20000.00,
+            "criteriosSelecao": "Criatividade e impacto da apresentação.",
+            "processoInscricao": "Inscreva-se através do nosso portal online.",
+            "dataPublicacao": "2024-03-05T10:00:00Z"
+        }
+    ]
+}
