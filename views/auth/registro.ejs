@@ -92,8 +92,11 @@
                     Swal.fire({
                         icon: "success",
                         title: 'Conta criada com sucesso',
-                        showConfirmButton: true,
+                        showConfirmButton: false,
                     });
+                    setTimeout(() => {
+                        window.location.replace("/");
+                    }, 2000);
                 }
             }).catch(e => {
                 alert(e)
