@@ -8,6 +8,28 @@ async function getAllUsers() {
   return allUsers;
 }
 
+async function getUser(where) {
+  const user = await prisma.user.findUnique({
+    where,
+  })
+
+  return user;
+}
+
+async function getUserById(id) {
+  if (id) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+ 
+    return user;
+  } else {
+    throw new Error('Unable to find user');
+  }
+}
+
 async function createUser(data) {
   const hash = await bcrypt.hash(data.password, saltRounds);
   data.password = hash;
@@ -25,18 +47,27 @@ async function deleteUser(userId) {
   return user;
 }
 
-async function updateUser(userId, data) {
-  const user = await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data,
-  });
-  return user;
+async function updateUser({ id, name, email, password }) {
+  if (name && email && password && id) {
+    const hash = await bcrypt.hash(password, saltRounds);
+ 
+    const updatedUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: { name, email, password: hash },
+    });
+ 
+    return updatedUser;
+  } else {
+    throw new Error('Unable to update user');
+  }
 }
 
 module.exports = {
   getAllUsers,
+  getUserById,
+  getUser,
   createUser,
   deleteUser,
   updateUser,

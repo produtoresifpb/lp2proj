@@ -1,8 +1,13 @@
 const { prisma } = require("../prisma/prisma");
 
-// async function getNoticeFeedbackById(id) {
-//   const feedback = await prisma.noticefeedback.find
-// }
+async function getNoticeFeedbackById(id) {
+  const notice = await prisma.notice.findUnique({
+    where: {
+      id: id
+    }
+  });
+  return notice;
+}
 
 async function createNoticeFeedback(data) {
   // console.log(prisma)
@@ -19,7 +24,7 @@ async function deleteNoticeFeedback(id) {
 }
 
 module.exports = {
-  // getNoticeFeedbackById,
+  getNoticeFeedbackById,
   createNoticeFeedback,
   deleteNoticeFeedback
 };
