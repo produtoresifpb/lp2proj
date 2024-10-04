@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require('multer');
 const upload = multer();
 const router = express.Router();
+const bcrypt = require('bcrypt')
+var jwt = require('jsonwebtoken');
 const { createUser, getUser } = require("../models/user.js");
 
 /* Tive q desativar os layouts nesses pra tirar a navbar e o footer */
@@ -31,6 +33,7 @@ router.post("/login", async function (req, res, next) {
       throw new Error('User not found');
     }
   } catch (error) {
+    console.log(error)
     res.status(401).json({ error: 'User not found' });
   }
 });

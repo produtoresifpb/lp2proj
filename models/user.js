@@ -22,6 +22,7 @@ async function getUserById(id) {
       where: {
         id,
       },
+      include: { EditaisFavoritos: true },
     });
  
     return user;
@@ -47,20 +48,20 @@ async function deleteUser(userId) {
   return user;
 }
 
-async function updateUser({ id, name, email, password }) {
-  if (name && email && password && id) {
-    const hash = await bcrypt.hash(password, saltRounds);
- 
+async function updateUser({ id, data }) {
+  if (!id || !data || Object.keys(data).length === 0) {
+    throw new Error('Unable to update user.');
+  }
+
+  try {
     const updatedUser = await prisma.user.update({
-      where: {
-        id,
-      },
-      data: { name, email, password: hash },
+      where: { id },
+      data,
     });
- 
+
     return updatedUser;
-  } else {
-    throw new Error('Unable to update user');
+  } catch (error) {
+    throw new Error('Unable to update user: ' + error.message);
   }
 }
 

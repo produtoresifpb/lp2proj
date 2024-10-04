@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { getAllNotices, getNoticeById } = require("../models/notice.js");
 const { createNoticeFeedback } = require("../models/noticeFeedback.js");
+const { updateUser, getUserById } = require('../models/user.js')
+const { isAuthenticated } = require('../middlewares/auth.js');
 
 router.get("/", async function (req, res, next) {
   try {
@@ -24,6 +26,37 @@ router.get("/", async function (req, res, next) {
     res.status(500).redirect("/", { error: err });
   }
 });
+
+router.get('/editais-favoritos', isAuthenticated, async (req, res, next) => {
+  const { EditaisFavoritos: editais } = await getUserById(req.userId)
+  res.status(200).json(editais)
+})
+
+router.post('/add-favorite/:id', isAuthenticated, async (req, res, next) => {
+  const idEdital = parseInt(req.params.id);
+  
+  try {
+    const updatedUser = await updateUser({
+      id: req.userId,
+      data: {
+        EditaisFavoritos: {
+          connect: {
+            id: idEdital
+          }
+        }
+      }
+    });
+    if (updatedUser) {
+      res.json({ success: true, message: 'Edital adicionado aos favoritos.' });
+    } else {
+      throw new Error('Usuário não encontrado ou falha ao atualizar.');
+    }
+  } catch (error) {
+    console.error('Erro ao adicionar favorito:', error);
+    res.status(500).json({ success: false, message: 'Erro ao adicionar favorito.' });
+  }
+});
+
 
 router.get("/create", function (req, res, next) {
   res.render("notice/create_notice");

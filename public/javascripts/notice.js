@@ -15,9 +15,8 @@ categoriaArtistica.value = filterDrops[2];
 function openNotice(index) {
   const edital = editais[index];
   if (edital) {
-    document.getElementById("noticeTitle").innerText = `Edital n° ${
-      edital.id
-    } - ${edital.title}`;
+    document.getElementById("noticeTitle").innerText = `Edital n° ${edital.id
+      } - ${edital.title}`;
     const date = new Date(edital.subscriptionDeadline);
     date.setHours(date.getHours() + 3);
     const day = date.getDate();
@@ -31,21 +30,28 @@ function openNotice(index) {
       'DANCE': 'Dança',
       'ARTS': 'Artes Visuais',
     }
- 
+
     document.getElementById("feedback").href = `/edital/feedback/${edital.id}`
     document.getElementById("subscriptionDeadline").innerText = `${formattedDay}/${formattedMonth}/${date.getFullYear()}`;
-    document.getElementById("favoritar").onclick = function() {
-      const editais = JSON.parse(localStorage.getItem("editais") || '[]'); 
-      if (editais.find(el => el.id == edital.id)) {
-        alert('Esse edital já está favoritado!')
-        return;
-      }; 
-      editais.push(edital) 
-      localStorage.setItem('editais', JSON.stringify(editais)) 
-      alert('Edital favoritado.')
+    document.getElementById("favoritar").onclick = function () {
+
+      fetch('edital/add-favorite/' + edital.id, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      // const editais = JSON.parse(localStorage.getItem("editais") || '[]'); 
+      // if (editais.find(el => el.id == edital.id)) {
+      //   alert('Esse edital já está favoritado!')
+      //   return;
+      // }; 
+      // editais.push(edital) 
+      // localStorage.setItem('editais', JSON.stringify(editais)) 
+      // alert('Edital favoritado.')
     }
     const showMore = document.getElementById('showMore')
-    showMore.onclick = function() {
+    showMore.onclick = function () {
       const overlay = document.getElementById('hidden')
       overlay.classList.toggle('hidden')
       if (overlay.classList.contains("hidden")) {
@@ -57,7 +63,7 @@ function openNotice(index) {
 
     document.getElementById('processoInscricao').innerText = edital.processoInscricao
     document.getElementById('criteriosSelecao').innerText = edital.criteriosSelecao
-    
+
     document.getElementById('artisticCategory').innerText = categorys[edital.artisticCategory];
     document.getElementById("description").innerText = edital.description;
     document.getElementById("editalOverlay").classList.remove("hidden");

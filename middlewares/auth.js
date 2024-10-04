@@ -3,15 +3,13 @@ const jwt = require('jsonwebtoken')
 function isAuthenticated(req, res, next) {
   try {
     const { authorization } = req.headers;
-
+    console.log(authorization)
     const [, token] = authorization.split(' ');
-
     const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-
     req.userId = userId;
-
     next();
   } catch (error) {
+    console.log(error)
     res.status(401).send({ auth: false, message: 'Token invalid.' });
   }
 }
