@@ -14,21 +14,16 @@ router.get("/login", function (req, res, next) {
 router.post("/login", async function (req, res, next) {
   try {
     const { email, password } = req.body
-    console.log(email, password)
- 
-    const { id: userId, password: hash } = await getUser({ email });
-    console.log(userId, hash)
- 
+    const { id: userId, password: hash, name } = await getUser({ email });
     const match = await bcrypt.compare(password, hash);
- 
+
     if (match) {
       const token = jwt.sign(
-        { userId },
+        { userId, name },
         process.env.JWT_SECRET,
         { expiresIn: 3600 } // 1h
       );
- 
-      return res.json({ auth: true, token });
+      return res.json({ auth: true, token, name });
     } else {
       throw new Error('User not found');
     }
@@ -40,16 +35,16 @@ router.post("/login", async function (req, res, next) {
 
 router.get("/registro", function (req, res, next) {
   res.render("auth/registro", { layout: false });
-}); 
+});
 
 router.post("/registro", upload.none(), async (req, res, next) => {
   try {
     const user = req.body;
     delete user.password2;
     console.log(user);
-    
+
     const createdUser = await createUser(user);
-    
+
     delete createUser.password;
     delete createUser.cpf;
     delete createUser.birthDate;
@@ -58,10 +53,10 @@ router.post("/registro", upload.none(), async (req, res, next) => {
     return res.json(createdUser);
   } catch (e) {
     console.log(e)
-    if(e.code == 'P2002') {
+    if (e.code == 'P2002') {
       res.status(400).json({
         message: 'E-mail ou CPF já estão cadastrados.'
-       })
+      })
     }
   }
 });

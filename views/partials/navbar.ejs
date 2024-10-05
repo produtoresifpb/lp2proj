@@ -23,12 +23,47 @@
                 <li class="nav-item"><a href="/auth/login" class="btn btn-secondary me-2 text-white"
                         role="button">Entrar</a></li>
                 <li class="nav-item"><a href="/auth/registro" class="btn btn-secondary me-2" role="button">Cadastrar</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
+
 <script>
+    function updateNavbar() {
+        fetch('/api/acc/get-session-name', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Err');
+                }
+                return res.json();
+            })
+            .then(json => {
+                const userName = json.name;
+                const userNavbar = `
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ${userName}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/profile">Perfil</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                </ul>
+            </li>
+        `;
+                document.querySelector('.navbar-nav.ml-auto').innerHTML = userNavbar;
+            })
+            .catch(e => {
+                console.error(e);
+            });
+    }
+
+    // Chama a função para atualizar a navbar quando a página carrega
+    document.addEventListener('DOMContentLoaded', updateNavbar);
+
 
     function editalCard(edital) {
         const now = new Date();
@@ -78,7 +113,7 @@
 
         if (res.ok) {
             Swal.fire('Sucesso!', 'Edital removido dos favoritos.', 'success');
-            document.getElementById('showNotice').click(); 
+            document.getElementById('showNotice').click();
         } else {
             Swal.fire('Erro!', 'Não foi possível remover o edital.', 'error');
         }

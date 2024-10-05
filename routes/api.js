@@ -1,6 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { getAllNotices, createNotice } = require("../models/notice.js");
+const { isAuthenticated } = require("../middlewares/auth.js");
+
+router.get('/acc/get-session-name', isAuthenticated, (req, res, next) => {
+  console.log(req.userId, req.name)
+  if (req.userId && req.name) {
+    res.status(200).send({ name: req.name })
+  }
+})
 
 router.post("/editais/create", async function (req, res, next) {
   try {
