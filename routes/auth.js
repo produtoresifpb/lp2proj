@@ -41,14 +41,13 @@ router.post("/registro", upload.none(), async (req, res, next) => {
   try {
     const user = req.body;
     delete user.password2;
-    console.log(user);
 
     const createdUser = await createUser(user);
 
-    delete createUser.password;
-    delete createUser.cpf;
-    delete createUser.birthDate;
-    delete createUser.registerDate;
+    delete createdUser.password;
+    delete createdUser.cpf;
+    delete createdUser.birthDate;
+    delete createdUser.registerDate;
 
     return res.json(createdUser);
   } catch (e) {
