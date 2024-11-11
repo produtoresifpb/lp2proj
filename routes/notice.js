@@ -58,7 +58,7 @@ router.post('/add-favorite/:id', isAuthenticated, async (req, res, next) => {
 });
 
 
-router.get("/create", function (req, res, next) {
+router.get("/create", isAuthenticated, function (req, res, next) {
   res.render("notice/create_notice");
 });
 
@@ -67,7 +67,7 @@ router.get("/feedback/:id", async function (req, res, next) {
   res.render("notice/feedback", { editalID });
 });
 
-router.post("/feedback/:id", async function (req, res, next) {
+router.post("/feedback/:id", isAuthenticated, async function (req, res, next) {
   try {
     const noticeFeedback = await createNoticeFeedback({
       userName: req.body.name,

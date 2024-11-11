@@ -9,7 +9,6 @@ function isAuthenticated(req, res, next) {
     req.name = name
     next();
   } catch (error) {
-    console.log(error);
     res.redirect('/auth/login');
   }
 }
