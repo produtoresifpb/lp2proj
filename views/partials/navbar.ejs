@@ -33,37 +33,49 @@
         localStorage.removeItem('token')
         location.reload()
     }
-    function updateNavbar() {
-        fetch('/api/acc/get-session-name', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+    // Função para atualizar a barra de navegação com o nome do usuário
+function updateNavbar() {
+    // Realiza uma requisição para a API que retorna o nome do usuário a partir do token de autenticação
+    fetch('/api/acc/get-session-name', {
+        headers: {
+            // Envia o token de autenticação armazenado no localStorage para a API
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+        .then(res => {
+            // Verifica se a resposta da requisição foi bem-sucedida
+            if (!res.ok) {
+                throw new Error('Err'); // Lança um erro se a resposta não for ok
             }
+            return res.json(); // Converte a resposta para JSON
         })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Err');
-                }
-                return res.json();
-            })
-            .then(json => {
-                const userName = json.name;
-                const userNavbar = `
+        .then(json => {
+            // Extrai o nome do usuário da resposta JSON
+            const userName = json.name;
+            
+            // Monta o HTML para o item de navegação com o nome do usuário
+            const userNavbar = `
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ${userName}
+                    ${userName} <!-- Exibe o nome do usuário -->
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/profile">Perfil</a></li>
-                    <li><a class="dropdown-item" href="#" onclick='logout()'>Logout</a></li>
+                    <li><a class="dropdown-item" href="/profile">Perfil</a></li> <!-- Link para o perfil do usuário -->
+                    <li><a class="dropdown-item" href="#" onclick='logout()'>Logout</a></li> <!-- Link para logout -->
                 </ul>
             </li>
         `;
-                document.querySelector('.navbar-nav.ml-auto').innerHTML = userNavbar;
-            })
-            .catch(e => {
-                console.error(e);
-            });
-    }
+            
+            // Atualiza o conteúdo da barra de navegação com o novo HTML
+            // A classe .navbar-nav.ml-auto refere-se ao container de navegação à direita
+            document.querySelector('.navbar-nav.ml-auto').innerHTML = userNavbar;
+        })
+        .catch(e => {
+            // Em caso de erro, exibe o erro no console
+            console.error(e);
+        });
+}
+
 
     // Chama a função para atualizar a navbar quando a página carrega
     document.addEventListener('DOMContentLoaded', updateNavbar);
