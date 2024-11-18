@@ -58,7 +58,7 @@ router.post('/add-favorite/:id', isAuthenticated, async (req, res, next) => {
 });
 
 
-router.get("/create", isAuthenticated, function (req, res, next) {
+router.get("/create", function (req, res, next) {
   res.render("notice/create_notice");
 });
 

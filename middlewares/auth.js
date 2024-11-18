@@ -9,7 +9,7 @@ function isAuthenticated(req, res, next) {
     req.name = name
     next();
   } catch (error) {
-    res.redirect('/auth/login');
+    res.status(401).send('Login falhou! Erro!')
   }
 }
 

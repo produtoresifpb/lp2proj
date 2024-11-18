@@ -42,26 +42,44 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Prazo da Inscrição</label>
-                    <input type="date" name="subscriptionDeadline" class="form-control" id="subscriptionDeadline" required>
+                    <input type="date" name="subscriptionDeadline" class="form-control" id="subscriptionDeadline"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Detalhe do Financiamento</label>
-                    <textarea name="detalhesFinanciamento" class="form-control" id="detalhesFinanciamento" required></textarea>
+                    <textarea name="detalhesFinanciamento" class="form-control" id="detalhesFinanciamento"
+                        required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="valorFinanciamento" class="form-label">Valor do Financiamento</label>
-                    <input type="number" name="valorFinanciamento" class="form-control" id="valorFinanciamento" required min="0" step="0.01">
+                    <input type="number" name="valorFinanciamento" class="form-control" id="valorFinanciamento" required
+                        min="0" step="0.01">
                 </div>
                 <div class="mb-3">
                     <label for="processoInscricao" class="form-label">Processo de Inscrição</label>
                     <textarea name="processoInscricao" class="form-control" id="processoInscricao" required></textarea>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
     </div>
 </main>
 <script>
-
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('token')
+        try {
+            const res = await fetch('/api/acc/get-session-name', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            if (res.status !== 200) {
+                window.location.href = '/auth/login'
+            }
+        } catch (e) {
+            window.location.href = '/auth/login'
+        }
+    })
 </script>

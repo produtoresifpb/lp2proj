@@ -43,3 +43,22 @@
 
     </form>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('token')
+        try {
+            const res = await fetch('/api/acc/get-session-name', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            if (res.status !== 200) {
+                window.location.href = '/auth/login'
+            }
+        } catch (e) {
+            window.location.href = '/auth/login'
+        }
+    })
+</script>
