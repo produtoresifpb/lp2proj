@@ -1,4 +1,4 @@
-export function validate(schema) {
+const validate = (schema) => {
     return function (req, res, next) {
       try {
         schema.parse({
@@ -13,4 +13,5 @@ export function validate(schema) {
       }
     };
   }
-   
+
+module.exports = validate;

@@ -3,15 +3,22 @@ const multer = require('multer');
 const upload = multer();
 const router = express.Router();
 const bcrypt = require('bcrypt')
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { createUser, getUser } = require("../models/user.js");
+const { z } = require('zod');
+const validate = require("../middlewares/validate.js")
 
 /* Tive q desativar os layouts nesses pra tirar a navbar e o footer */
 router.get("/login", function (req, res, next) {
   res.render("auth/login", { layout: false });
 });
 
-router.post("/login", async function (req, res, next) {
+router.post("/login", validate(z.object({
+  body: z.object({
+    email: z.string().email(),
+    password: z.string(),
+  })
+})), async function (req, res, next) {
   try {
     const { email, password } = req.body
     const { id: userId, password: hash, name } = await getUser({ email });
@@ -37,7 +44,28 @@ router.get("/registro", function (req, res, next) {
   res.render("auth/registro", { layout: false });
 });
 
-router.post("/registro", upload.none(), async (req, res, next) => {
+router.post("/registro", upload.none(), validate(
+  z.object({
+    body: z.object({
+      name: z.string(),
+      email : z.string().email(),
+      password: z.string(),
+      password2: z.string(),
+      birthDate: z.string().date(),
+      cpf: z.string({
+          required_error: 'CPF é obrigatório.',
+        })
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, '');
+          return replacedDoc.length >= 11;
+        }, 'CPF deve conter no mínimo 11 caracteres.')
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, '');
+          return !!Number(replacedDoc);
+        }, 'CPF deve conter apenas números.'),
+    }),
+  })
+), async (req, res, next) => {
   try {
     const user = req.body;
     delete user.password2;
