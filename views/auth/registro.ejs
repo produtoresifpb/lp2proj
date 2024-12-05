@@ -26,10 +26,12 @@
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="name" placeholder="Digite seu nome">
+                <p class="text-danger visually-hidden" id="alertaName">Nome inválido, tente escrever algo entre 4 a 40 caracteres.</p>
             </div>
             <div class="mb-3">
                 <label for="cpf" class="form-label">CPF</label>
                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF">
+                <p class="text-danger visually-hidden" id="alertaCpf">CPF Inválido</p>
             </div>
             <div class="mb-3">
                 <label for="dataNascimento" class="form-label">Data de Nascimento</label>
@@ -40,14 +42,15 @@
                 <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail">
             </div>
             <div class="mb-3">
+                
                 <label for="senha" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha">
             </div>
             <div class="mb-3">
-                <p class="text-danger visually-hidden" id="alertaSenha">As senhas são diferentes</p>
                 <label for="confirmarSenha" class="form-label">Confirmação de Senha</label>
                 <input type="password" name="password2" class="form-control" id="confirmarSenha"
                     placeholder="Confirme sua senha">
+                <p class="text-danger visually-hidden" id="alertaSenha">As senhas são diferentes</p>
             </div>
         </div>
         <button type="submit" id="submitButton" class="btn">Registrar</button>
