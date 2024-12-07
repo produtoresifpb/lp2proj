@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const { z } = require('zod');
+const validate = require('../middlewares/validate.js');
 const { getAllNotices, getNoticeById } = require("../models/notice.js");
 const { createNoticeFeedback } = require("../models/noticeFeedback.js");
 const { updateUser, getUserById } = require('../models/user.js')
 const { isAuthenticated } = require('../middlewares/auth.js');
 
-router.get("/", async function (req, res, next) {
+router.get("/", validate(z.object({
+  query: z.object({
+    flt: z.string().optional(),
+    prazo: z.string().optional(),
+    ap: z.string().optional(),
+    cta: z.string().optional(),
+    vlrmn: z.string().optional(),
+    vlrmx: z.string().optional(),
+    b: z.string().optional(),
+  })
+})), async function (req, res, next) {
   try {
     const busca = req.query.b || "";
     const filtro = {
@@ -32,9 +44,15 @@ router.get('/editais-favoritos', isAuthenticated, async (req, res, next) => {
   res.status(200).json(editais)
 })
 
-router.post('/add-favorite/:id', isAuthenticated, async (req, res, next) => {
+router.post('/add-favorite/:id', isAuthenticated, validate(
+  z.object({
+    params: z.object({
+      id: z.string(),
+    }),
+  })
+), async (req, res, next) => {
   const idEdital = parseInt(req.params.id);
-  
+
   try {
     const updatedUser = await updateUser({
       id: req.userId,
@@ -67,7 +85,17 @@ router.get("/feedback/:id", async function (req, res, next) {
   res.render("notice/feedback", { editalID });
 });
 
-router.post("/feedback/:id", isAuthenticated, async function (req, res, next) {
+router.post("/feedback/:id", validate(z.object({
+  params: z.object({
+    id: z.string()
+  }),
+  body: z.object({
+    name: z.string(),
+    email: z.string().email(),
+    subject: z.string(),
+    descriptionProblem: z.string(),
+  }),
+})), async function (req, res, next) {
   try {
     const noticeFeedback = await createNoticeFeedback({
       userName: req.body.name,
@@ -82,6 +110,6 @@ router.post("/feedback/:id", isAuthenticated, async function (req, res, next) {
     console.log(err)
     res.status(500).render("notice/feedback", { error: err });
   }
-})
+}),
 
-module.exports = router;
+  module.exports = router;

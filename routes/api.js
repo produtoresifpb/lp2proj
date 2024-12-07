@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { z } = require('zod');
+const validate  = require('../middlewares/validate.js');
 const { getAllNotices, createNotice } = require("../models/notice.js");
 const { isAuthenticated } = require("../middlewares/auth.js");
 
@@ -10,7 +12,20 @@ router.get('/acc/get-session-name', isAuthenticated, (req, res, next) => {
   }
 })
 
-router.post("/editais/create", async function (req, res, next) {
+router.post("/editais/create",  validate(z.object({
+  body: z.object({
+    title: z.string(),
+    organizador: z.string(),
+    description: z.string(),
+    support: z.string(),
+    artisticCategory: z.string(),
+    subscriptionDeadline: z.string().date(),
+    criteriosSelecao: z.string(),
+    processoInscricao: z.string(),
+    detalhesFinanciamento: z.string(),
+    valorFinanciamento: z.string()
+  ,})
+})), async function (req, res, next) {
   try {
     const notice = await createNotice({
       title: req.body.title,

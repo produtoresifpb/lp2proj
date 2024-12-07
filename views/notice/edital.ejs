@@ -80,7 +80,7 @@
                     <form class="d-flex col-3" role="search" id="buscar-edital"
                         enctype="application/x-www-form-urlencoded"
                         autocomplete="off">
-                        <input class="form-control me-2" type="search" id="busca" name="b"
+                        <input minlength="5" class="form-control me-2" type="search" id="busca" name="b"
                             placeholder="Buscar por editais" aria-label="Search" id="busca-parametro" 
                             value="<%= busca || "" %>" />
                         <input type="hidden" name="flt" value="<%= filtro.order || "" %>">

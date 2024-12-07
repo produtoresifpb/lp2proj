@@ -12,7 +12,7 @@ model User {
   email             String              @unique
   name              String
   password          String
-  cpf               String?             @unique
+  cpf               String?             @unique @db.VarChar(11)
   birthDate         DateTime?
   registerDate      DateTime            @default(now())
   profile           Profile             @default(PUBLIC)
@@ -52,7 +52,7 @@ model Evento {
   EventoID          Int                 @id @default(autoincrement())
   NomeEvento        String
   Descricao         String?
-  DataHora          DateTime
+  DataHora          DateTime      
   Localizacao       String
   Organizador       String
   InfoIngresso      String?

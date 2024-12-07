@@ -44,48 +44,65 @@ router.get("/registro", function (req, res, next) {
   res.render("auth/registro", { layout: false });
 });
 
-router.post("/registro", upload.none(), validate(
-  z.object({
-    body: z.object({
-      name: z.string(),
-      email : z.string().email(),
-      password: z.string(),
-      password2: z.string(),
-      birthDate: z.string().date(),
-      cpf: z.string({
-          required_error: 'CPF é obrigatório.',
-        })
-        .refine((doc) => {
-          const replacedDoc = doc.replace(/\D/g, '');
-          return replacedDoc.length >= 11;
-        }, 'CPF deve conter no mínimo 11 caracteres.')
-        .refine((doc) => {
-          const replacedDoc = doc.replace(/\D/g, '');
-          return !!Number(replacedDoc);
-        }, 'CPF deve conter apenas números.'),
-    }),
-  })
-), async (req, res, next) => {
-  try {
-    const user = req.body;
-    delete user.password2;
+function validarCPF(cpf) {
+  cpf = cpf.replace(/[^\d]/g, "");
 
-    const createdUser = await createUser(user);
-
-    delete createdUser.password;
-    delete createdUser.cpf;
-    delete createdUser.birthDate;
-    delete createdUser.registerDate;
-
-    return res.json(createdUser);
-  } catch (e) {
-    console.log(e)
-    if (e.code == 'P2002') {
-      res.status(400).json({
-        message: 'E-mail ou CPF já estão cadastrados.'
-      })
-    }
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+      return false;
   }
+
+  const calcularDigito = (base) => {
+      let soma = 0;
+      for (let i = 0; i < base.length; i++) {
+          soma += parseInt(base[i]) * (base.length + 1 - i);
+      }
+      const resto = soma % 11;
+      return resto < 2 ? 0 : 11 - resto;
+  };
+
+  const base = cpf.slice(0, 9);
+  const digito1 = calcularDigito(base);
+  const digito2 = calcularDigito(base + digito1);
+
+  return cpf === base + digito1 + digito2;
+}
+
+// Rota de registro com validação de CPF
+router.post("/registro", upload.none(), validate(
+z.object({
+  body: z.object({
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string(),
+    password2: z.string(),
+    birthDate: z.string().date(),
+    cpf: z.string({
+        required_error: 'CPF é obrigatório.',
+      })
+      .refine((doc) => validarCPF(doc), 'CPF inválido.'),
+  }),
+})
+), async (req, res, next) => {
+try {
+  const user = req.body;
+  delete user.password2;
+
+  const createdUser = await createUser(user);
+
+  delete createdUser.password;
+  delete createdUser.cpf;
+  delete createdUser.birthDate;
+  delete createdUser.registerDate;
+
+  return res.json(createdUser);
+} catch (e) {
+  console.log(e);
+  if (e.code === 'P2002') {
+    res.status(400).json({
+      message: 'E-mail ou CPF já estão cadastrados.'
+    });
+  }
+}
 });
 
 router.get("/resetsenha", function (req, res, next) {
