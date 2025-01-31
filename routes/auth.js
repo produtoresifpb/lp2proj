@@ -30,6 +30,7 @@ router.post("/login", validate(z.object({
         process.env.JWT_SECRET,
         { expiresIn: 3600 } // 1h
       );
+      res.locals.userId = userId;
       return res.json({ auth: true, token, name });
     } else {
       throw new Error('User not found');

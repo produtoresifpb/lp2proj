@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { z } = require('zod');
-const validate  = require('../middlewares/validate.js');
+const validate = require('../middlewares/validate.js');
 const { getAllNotices, createNotice } = require("../models/notice.js");
 const { isAuthenticated } = require("../middlewares/auth.js");
+const { Email } = require("../controllers/email.js");
 
 router.get('/acc/get-session-name', isAuthenticated, (req, res, next) => {
   console.log(req.userId, req.name)
@@ -12,7 +13,27 @@ router.get('/acc/get-session-name', isAuthenticated, (req, res, next) => {
   }
 })
 
-router.post("/editais/create",  validate(z.object({
+router.post('/send-email/', (req, res) => {
+  console.log('send-email')
+  const email = req.body.email
+  Email.send(email)
+  res.status(200).send('Email de verificação enviado')
+})
+
+router.post('/check-code/', (req, res) => {
+  const email = req.body.email
+  const code = req.body.code
+  console.log(req.body)
+  const check = Email.checkCode(email, code)
+  console.log(check)
+  if (check) {
+    res.status(200).send('Código correto')
+  } else {
+    res.status(400).send('Código incorreto')
+  }
+})
+
+router.post("/editais/create", validate(z.object({
   body: z.object({
     title: z.string(),
     organizador: z.string(),
@@ -24,7 +45,8 @@ router.post("/editais/create",  validate(z.object({
     processoInscricao: z.string(),
     detalhesFinanciamento: z.string(),
     valorFinanciamento: z.string()
-  ,})
+    ,
+  })
 })), async function (req, res, next) {
   try {
     const notice = await createNotice({
@@ -47,6 +69,7 @@ router.post("/editais/create",  validate(z.object({
     res.status(500).render("notice/create_notice", { error: err });
   }
 });
+
 
 router.get("/editais/list", async function (req, res, next) {
   // não sendo usado

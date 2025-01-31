@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
@@ -28,8 +29,8 @@
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" name="email" class="form-control" id="email"
-                        placeholder="Digite seu e-mail" required>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Digite seu e-mail"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
@@ -48,29 +49,68 @@
 
         <script>
             document.getElementById('loginForm').addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
                 try {
-                    const response = await fetch('login', {
+                    event.preventDefault();
+                    const email = document.getElementById('email').value;
+                    await fetch('/api/send-email', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email, password })
-                    });
-                    const data = await response.json();
-                    if (data.auth) {
-                        localStorage.setItem('token', data.token);
-                        alert('Login bem-sucedido!');
-                        window.location.href = '/';
-                    } else {
-                        alert('Erro no login, verifique suas credenciais.');
+                        body: JSON.stringify({ email })
+                    })
+                    Swal.fire('Codigo de verificação enviado para o seu e-mail.');
+                    async function recursiveVerify() {
+                        const { value: code } = await Swal.fire({
+                            title: 'Verificação',
+                            text: 'Insira o código de verificação enviado para o seu e-mail:',
+                            input: 'text',
+                            inputPlaceholder: 'Código',
+                            showCancelButton: true,
+                            confirmButtonText: 'Enviar',
+                            cancelButtonText: 'Cancelar'
+                        });
+
+                        if (!code) return;
+
+                        const response = await fetch('/api/check-code', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, code })
+                        });
+
+                        if (response.status === 200) {
+                            Swal.fire('Código de verificação correto!');
+                            const password = document.getElementById('password').value;
+
+                            const response = await fetch('login', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ email, password })
+                            });
+                            const data = await response.json();
+                            if (data.auth) {
+                                localStorage.setItem('token', data.token);
+                                alert('Login bem-sucedido!');
+                                window.location.href = '/';
+                            } else {
+                                alert('Erro no login, verifique suas credenciais.');
+                            }
+                        } else {
+                            await Swal.fire('Código de verificação incorreto!');
+                            recursiveVerify();
+                        }
                     }
+                    recursiveVerify();
+
+
                 } catch (error) {
                     console.error('Erro na requisição:', error);
                 }
             });
         </script>
         <%- include('../partials/vlibras.ejs') %>
+
 </html>

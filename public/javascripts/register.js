@@ -78,33 +78,71 @@ nameInput.addEventListener('input', (e) => {
 });
 
 const registroForm = document.getElementById('registroForm');
-registroForm.addEventListener('submit', (e) => {
+registroForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(registroForm);
+    const email = document.getElementById('email').value;
+    await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+    });
+    
+    Swal.fire('Código de verificação enviado para o seu e-mail.');
+    
+    async function recursiveVerify() {
+        const { value: code } = await Swal.fire({
+            title: 'Verificação',
+            text: 'Insira o código de verificação enviado para o seu e-mail:',
+            input: 'text',
+            inputPlaceholder: 'Código',
+            showCancelButton: true,
+            confirmButtonText: 'Enviar',
+            cancelButtonText: 'Cancelar'
+        });
 
-    fetch('registro', {
-        method: 'post',
-        body: formData,
-    }).then(async (res) => {
-        const data = await res.json();
-        if (res.status == 400) {
-            Swal.fire({
-                icon: "error",
-                title: data.message,
-                showConfirmButton: true,
+        if (!code) return;
+
+        const response = await fetch('/api/check-code', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, code })
+        });
+
+        if (response.status === 200) {
+            Swal.fire('Código de verificação correto!');
+            const formData = new FormData(registroForm);
+
+            fetch('registro', {
+                method: 'POST',
+                body: formData,
+            }).then(async (res) => {
+                const data = await res.json();
+                if (res.status == 400) {
+                    Swal.fire({
+                        icon: "error",
+                        title: data.message,
+                        showConfirmButton: true,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Conta criada com sucesso',
+                        showConfirmButton: false,
+                    });
+                    setTimeout(() => {
+                        window.location.replace("/");
+                    }, 2000);
+                }
+            }).catch(e => {
+                alert(e);
             });
         } else {
-            Swal.fire({
-                icon: "success",
-                title: 'Conta criada com sucesso',
-                showConfirmButton: false,
-            });
-            setTimeout(() => {
-                window.location.replace("/");
-            }, 2000);
+            await Swal.fire('Código de verificação incorreto!');
+            recursiveVerify();
         }
-    }).catch(e => {
-        alert(e);
-    });
+    }
+    recursiveVerify();
 });
