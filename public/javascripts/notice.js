@@ -33,6 +33,9 @@ function openNotice(index) {
 
     document.getElementById("feedback").href = `/edital/feedback/${edital.id}`
     document.getElementById("subscriptionDeadline").innerText = `${formattedDay}/${formattedMonth}/${date.getFullYear()}`;
+    document.getElementById("pdf").onclick = function () {
+      window.open(edital.pdfFile.path, '_blank');
+    }
     document.getElementById("favoritar").onclick = function () {
 
       fetch('edital/add-favorite/' + edital.id, {

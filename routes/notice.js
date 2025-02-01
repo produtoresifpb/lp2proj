@@ -29,6 +29,7 @@ router.get("/", validate(z.object({
       valorMax: parseFloat(req.query.vlrmx) || undefined,
     };
     const editais = await getAllNotices(busca, filtro);
+    console.log(editais[0])
     res.render("notice/edital", {
       editais: editais,
       busca: busca,

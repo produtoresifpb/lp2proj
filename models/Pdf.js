@@ -1,6 +1,7 @@
-const prisma = require('../prisma/prisma');
+const { prisma } = require('../prisma/prisma');
 
 async function createPdf({ noticeID, path }) {
+ 
   const newPdf = await prisma.pdf.create({
     data: {
       path,

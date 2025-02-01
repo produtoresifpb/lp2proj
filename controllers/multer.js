@@ -10,6 +10,7 @@ const storageTypes = {
       cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
+      console.log(file)
       file.key = `${randomBytes(16).toString('hex')}-${file.originalname}`;
       cb(null, file.key);
     },

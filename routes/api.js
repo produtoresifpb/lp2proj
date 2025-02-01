@@ -82,6 +82,7 @@ router.post(
       }
       res.status(201).render("notice/sucess", { edital: notice });
     } catch (err) {
+      console.log(err)
       res.status(500).render("notice/create_notice", { error: err });
     }
   }
