@@ -34,6 +34,13 @@ async function getAllNotices(query, filter) {
       dataPublicacao:
         filter.order == "recentes" || !filter.order ? "desc" : "asc",
     },
+    include: {
+      pdfFile: {
+        select: {
+          path: true,
+        },
+      },
+    },
   });
 
   return allNotices;
@@ -42,7 +49,14 @@ async function getAllNotices(query, filter) {
 async function getNoticeById(id) {
   const notice = await prisma.notice.findUnique({
     where: {
-      id: id
+      id: id,
+      include: {
+        pdfFile: {
+          select: {
+            path: true,
+          },
+        },
+      },
     }
   });
   return notice;

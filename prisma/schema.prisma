@@ -1,6 +1,6 @@
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
 
 generator client {
@@ -34,9 +34,16 @@ model Notice {
   processoInscricao     String
   dataPublicacao        DateTime         @default(now())
   FeedbackNotice        FeedbackNotice[]
-  users User[]
+  users                 User[]
+  pdfFile               Pdf?
 }
 
+model Pdf {
+  id       Int    @id @default(autoincrement())
+  path  String
+  notice   Notice @relation(fields: [noticeID], references: [id])
+  noticeID Int    @unique
+}
 
 model FeedbackNotice {
   id                 Int      @id @default(autoincrement())
@@ -52,7 +59,7 @@ model Evento {
   EventoID          Int                 @id @default(autoincrement())
   NomeEvento        String
   Descricao         String?
-  DataHora          DateTime      
+  DataHora          DateTime
   Localizacao       String
   Organizador       String
   InfoIngresso      String?
