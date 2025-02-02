@@ -6,19 +6,22 @@
     <div class="geral">
         <div class="box">
             <div class="feed">
-                <p>Feedback - Edital nº <%= editalID %></p>
+                <p>Feedback - Edital nº <%= editalID %>
+                </p>
             </div>
             <div class="back">
                 <p>Caso haja algum problema com o edital selecionado, nos conte para que possamos resolver!</p>
             </div>
-            <form method="post" enctype="application/x-www-form-urlencoded">
+            <form method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Digite seu nome" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Digite seu nome"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Digite seu e-mail"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="subject" class="form-label">Assunto</label>
@@ -34,14 +37,20 @@
                 </div>
                 <div class="mb-3">
                     <label for="descriptionProblem" class="form-label">Descrição do problema</label>
-                    <textarea name="descriptionProblem" class="form-control" id="descriptionProblem" placeholder="Nos dê uma breve explicação do problema" required></textarea>
+                    <textarea name="descriptionProblem" class="form-control" id="descriptionProblem"
+                        placeholder="Nos dê uma breve explicação do problema" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="anexo" class="form-label">Anexo</label>
+                    <input type="file" name="anexo" />
                 </div>
 
-                    <button style="background-color: #64375E; border: 0" type="submit" class="btn btn-primary">Enviar</button>
+                <button style="background-color: #64375E; border: 0" type="submit"
+                    class="btn btn-primary">Enviar</button>
         </div>
 
 
-    </form>
+        </form>
 </main>
 
 <script>
@@ -53,7 +62,7 @@
                     'Authorization': `Bearer ${token}`
                 }
             })
-            
+
             if (res.status !== 200) {
                 window.location.href = '/auth/login'
             }

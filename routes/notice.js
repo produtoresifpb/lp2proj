@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { z } = require('zod');
 const validate = require('../middlewares/validate.js');
-const { getAllNotices, getNoticeById } = require("../models/notice.js");
+const { z } = require('zod');
+const multer = require('multer');
+const { getAllNotices } = require("../models/notice.js");
 const { createNoticeFeedback } = require("../models/noticeFeedback.js");
 const { updateUser, getUserById } = require('../models/user.js')
 const { isAuthenticated } = require('../middlewares/auth.js');
+const uploadConfig = require("../controllers/multer.js");
 
 router.get("/", validate(z.object({
   query: z.object({
@@ -86,7 +88,7 @@ router.get("/feedback/:id", async function (req, res, next) {
   res.render("notice/feedback", { editalID });
 });
 
-router.post("/feedback/:id", validate(z.object({
+router.post("/feedback/:id", multer(uploadConfig).single("anexo"), validate(z.object({
   params: z.object({
     id: z.string()
   }),

@@ -2,7 +2,7 @@ const path = require('node:path');
 const { randomBytes } = require('node:crypto');
 const multer = require('multer');
 
-const uploadPath = path.resolve('public', 'pdfs', 'notice');
+const uploadPath = path.resolve('public', 'attachments');
 
 const storageTypes = {
   local: multer.diskStorage({
@@ -24,7 +24,7 @@ const config = {
     fileSize: 2 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    const allowedMimes = ['application/pdf'];
+    const allowedMimes = ['application/pdf', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
 
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);

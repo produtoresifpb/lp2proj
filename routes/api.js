@@ -75,7 +75,7 @@ router.post(
         dataPublicacao: new Date().toISOString(),
       });
       if (req.file) {
-        const path = `/pdfs/notice/${req.file.filename}`;
+        const path = `/attachments/${req.file.filename}`;
         const noticeID = notice.id;
 
         await createPdf({ noticeID, path });
