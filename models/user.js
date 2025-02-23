@@ -32,11 +32,15 @@ async function getUserById(id) {
 }
 
 async function createUser(data) {
+  try {
   const hash = await bcrypt.hash(data.password, saltRounds);
   data.password = hash;
   data.birthDate = new Date(data.birthDate).toISOString();
   const user = await prisma.user.create({ data });
   return user;
+  } catch (error) {
+    throw new Error('Unable to create user: ' + error.message);
+  }
 }
 
 async function deleteUser(userId) {

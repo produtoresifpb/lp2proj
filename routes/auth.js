@@ -36,7 +36,6 @@ router.post("/login", validate(z.object({
       throw new Error('User not found');
     }
   } catch (error) {
-    console.log(error)
     res.status(401).json({ error: 'User not found' });
   }
 });
@@ -97,12 +96,9 @@ try {
 
   return res.json(createdUser);
 } catch (e) {
-  console.log(e);
-  if (e.code === 'P2002') {
     res.status(400).json({
       message: 'E-mail ou CPF já estão cadastrados.'
     });
-  }
 }
 });
 
